@@ -2,9 +2,9 @@ package clases;
 
 public abstract class Oferta {
 	
-	private String nombre;
-	private int costo;
-	private float duracion;
+	protected String nombre;
+	protected int costo;
+	protected float duracion;
 	
 	public Oferta(String nombre, int costo, float duracion) {
 		
@@ -12,6 +12,6 @@ public abstract class Oferta {
 		this.costo = costo;
 		this.duracion = duracion;
 	}
-	
+
 	
 }
