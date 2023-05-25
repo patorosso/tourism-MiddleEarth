@@ -3,11 +3,11 @@ package main;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import paqueteTP.AplicacionMovil;
-import paqueteTP.Atraccion;
-import paqueteTP.TpResolucion;
-import paqueteTP.Visitante;
-import paqueteTP.Promocion;
+import data.models.AplicacionMovil;
+import data.models.Atraccion;
+import data.models.Promocion;
+import data.models.TpResolucion;
+import data.models.Visitante;
 
 public class TpMain {
 

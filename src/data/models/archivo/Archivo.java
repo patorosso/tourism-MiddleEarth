@@ -1,4 +1,4 @@
-package archivo;
+package data.models.archivo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,9 +9,9 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import paqueteTP.Visitante;
-import paqueteTP.Atraccion;
-import paqueteTP.Promocion;
+import data.models.Atraccion;
+import data.models.Promocion;
+import data.models.Visitante;
 
 import java.util.Random;
 

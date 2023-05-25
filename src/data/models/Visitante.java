@@ -1,4 +1,4 @@
-package paqueteTP;
+package data.models;
 
 public class Visitante {
 	

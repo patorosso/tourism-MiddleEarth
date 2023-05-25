@@ -1,16 +1,13 @@
 package main;
 
-//import java.io.File;
-
-import paqueteTP.Resolucion;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import paqueteTP.Resolucion;
-import paqueteTP.Atraccion;
-import paqueteTP.Visitante;
+import data.models.Atraccion;
+import data.models.Resolucion;
+import data.models.Visitante;
 
 public class Main {
 
