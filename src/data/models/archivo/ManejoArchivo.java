@@ -1,4 +1,4 @@
-package archivo;
+package data.models.archivo;
 
 import java.io.File;
 import java.io.FileWriter;

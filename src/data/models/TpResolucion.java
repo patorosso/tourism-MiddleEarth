@@ -1,8 +1,8 @@
-package paqueteTP;
+package data.models;
 
 import java.util.ArrayList;
 
-import archivo.Archivo;
+import data.models.archivo.Archivo;
 
 public class TpResolucion {
 
