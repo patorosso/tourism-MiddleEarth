@@ -1,4 +1,4 @@
-package clases;
+package data.models;
 
 public class Compra {
 
