@@ -1,6 +1,7 @@
 package data.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Promocion {
 	
@@ -21,7 +22,7 @@ public abstract class Promocion {
 //		this.costo = costo;
 //	}
 	
-	public ArrayList<Atraccion> getAtracciones() {
+	public List<Atraccion> getAtracciones() {
 		return atracciones;
 	}
 	
