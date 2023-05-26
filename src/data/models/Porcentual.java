@@ -5,6 +5,12 @@ public class Porcentual extends Promocion{
 	private int porcentaje;
 //	private int costo;
 	
+	public Porcentual(String nombre, int precio, double duracion, String tipo) {
+		
+		super(nombre, precio, duracion, tipo);
+		
+	}
+	
 	public int getPorcentaje() {
 		return porcentaje;
 	}

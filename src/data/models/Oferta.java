@@ -3,38 +3,17 @@ package data.models;
 public abstract class Oferta implements Comparable<Oferta> {
 
 	protected String nombre;
-	protected int costo;
+	protected int precio;
 	protected double duracion;
-
-	public Oferta(String nombre, int costo, double duracion) {
+	protected String tipo;
+	
+	
+	public Oferta(String nombre, int precio, double duracion, String tipo) {
 
 		this.nombre = nombre;
-		this.costo = costo;
+		this.precio = precio;
 		this.duracion = duracion;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public int getCosto() {
-		return costo;
-	}
-
-	public void setCosto(int costo) {
-		this.costo = costo;
-	}
-
-	public double getDuracion() {
-		return duracion;
-	}
-
-	public void setDuracion(double duracion) {
-		this.duracion = duracion;
+		this.tipo = tipo;
 	}
 	
 	@Override
@@ -42,6 +21,8 @@ public abstract class Oferta implements Comparable<Oferta> {
 		
 		Object ofertaActual = this.getClass();
 		Object ofertaNueva = oferta.getClass();
+		
+		//Las preferencias se priorizan
 		
 		//Una promocion se prioriza sobre una atraccion
 		if(ofertaActual == Promocion.class && ofertaNueva == Atraccion.class) {
@@ -53,12 +34,40 @@ public abstract class Oferta implements Comparable<Oferta> {
 		}
 		
 		//Se prioriza la mayor duracion y costo
-		if(this.duracion + this.costo > oferta.duracion + oferta.costo)
+		if(this.duracion + this.precio > oferta.duracion + oferta.precio)
 			return -1;
-		if(this.duracion + this.costo < oferta.duracion + oferta.costo)
+		if(this.duracion + this.precio < oferta.duracion + oferta.precio)
 			return 1;
 		
-		return 1;
+		return 0;		
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public int getPrecio() {
+		return precio;
+	}
+	
+	public double getDuracion() {
+		return duracion;
+	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public void setPrecio(int costo) {
+		this.precio = costo;
+	}
+
+	public void setDuracion(double duracion) {
+		this.duracion = duracion;
 	}
 
 }

@@ -1,10 +1,16 @@
 package data.models;
 
-public class Absolutas extends Promocion{
+public class Absoluta extends Promocion{
 	
 	private int precioPromo;
 	
 	private int costo;
+	
+	public Absoluta (String nombre, int precio, double duracion, String tipo) {
+		
+		super(nombre, precio, duracion, tipo);
+		
+	}
 
 	public int getPrecioPromo() {
 		return precioPromo;
