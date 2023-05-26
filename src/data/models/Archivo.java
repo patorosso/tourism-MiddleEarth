@@ -13,13 +13,13 @@ import java.util.StringTokenizer;
 import java.util.Random;
 
 public class Archivo {
-	private String nombre; //esto es necesario?
+	private String nombre; // esto es necesario?
 
 	public Archivo(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public void generaObjectUsuario(String[] strArray, Usuario usuario) {
+	public void generaObjectUsuario(Usuario usuario, String[] strArray) {
 
 		int pos = 0;
 		for (int i = 0; i < strArray.length; i++) {
@@ -47,7 +47,7 @@ public class Archivo {
 		}
 	}
 
-	public void generaObjectAtraccion(String[] strArray, Atraccion atraccion) {
+	public void generaObjectAtraccion(Atraccion atraccion, String[] strArray) {
 
 		int pos = 0;
 
@@ -89,7 +89,7 @@ public class Archivo {
 
 	// Para cuando este la clase Promocion
 
-//	public void generaObjectPromocion(String[] strArray, Promocion promocion) {
+//	public void generaObjectPromocion(Promocion promocion, String[] strArray) {
 //
 //		int pos = 0;
 //		for (int i = 0; i < strArray.length; i++) {
@@ -126,14 +126,14 @@ public class Archivo {
 		String[] strArray = null;
 		strArray = linea.split("	");
 
-		generaObjectUsuario(strArray, usuario);
+		generaObjectUsuario(usuario, strArray);
 	}
 
 	public void parseStringAtraccion(String linea, Atraccion atraccion) {
 		String[] strArray = null;
 		strArray = linea.split("	");
 
-		generaObjectAtraccion(strArray, atraccion);
+		generaObjectAtraccion(atraccion, strArray);
 	}
 
 //	public void parseStringPromocion(String linea, Promocion promocion) {
@@ -177,7 +177,7 @@ public class Archivo {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-////		return Usuarios;
+////		return Usuarios; 
 //	}
 
 //	public void leerArchivoYListarAtraccion(ArrayList<Atraccion> atracciones) {

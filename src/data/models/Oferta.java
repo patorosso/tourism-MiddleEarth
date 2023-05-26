@@ -1,13 +1,13 @@
 package data.models;
 
 public abstract class Oferta {
-	
+
 	protected String nombre;
 	protected int costo;
 	protected double duracion;
-	
+
 	public Oferta(String nombre, int costo, double duracion) {
-		
+
 		this.nombre = nombre;
 		this.costo = costo;
 		this.duracion = duracion;
@@ -37,5 +37,4 @@ public abstract class Oferta {
 		this.duracion = duracion;
 	}
 
-	
 }

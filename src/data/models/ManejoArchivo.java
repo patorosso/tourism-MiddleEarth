@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.Scanner;
 
-/*esto fue copiado de MIEL ? 
+/*esto fue copiado de  https://github.com/paradigmas-de-programacion/workspace/tree/master/basicas-entrada-salida
 *
 *
 *

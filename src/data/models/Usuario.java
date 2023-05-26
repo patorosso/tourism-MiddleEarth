@@ -11,7 +11,8 @@ public class Usuario {
 
 	public Usuario(String nombre, int monedas, double tiempo, String preferencia) throws UsuarioExcepcion {
 
-		// Tal vez sea necesario un throw para cada parametro, para especificar cada mensaje.
+		// Tal vez sea necesario un throw para cada parametro, para especificar cada
+		// mensaje.
 		if ((nombre == null || nombre == "") || (preferencia == null || preferencia == null))
 			throw new UsuarioExcepcion("Sin nombre o preferencia");
 
