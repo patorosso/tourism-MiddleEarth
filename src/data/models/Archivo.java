@@ -59,8 +59,8 @@ public class Archivo {
 					pos++;
 				}
 
-				if (atraccion.getCosto() == 0 && pos == i) {
-					atraccion.setCosto(Integer.parseInt(strArray[i].toString()));
+				if (atraccion.getPrecio() == 0 && pos == i) {
+					atraccion.setPrecio(Integer.parseInt(strArray[i].toString()));
 					pos++;
 				}
 

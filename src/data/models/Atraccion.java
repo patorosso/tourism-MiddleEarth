@@ -7,7 +7,7 @@ public class Atraccion extends Oferta {
 
 	private int cupos;
 
-	//pasar a ofertas
+	// pasar a ofertas
 	private static final List<String> LISTA_TIPOS = new ArrayList<String>(
 			Arrays.asList("Aventura", "Degustacion", "Paisaje"));
 
@@ -23,11 +23,6 @@ public class Atraccion extends Oferta {
 		}
 
 		this.cupos = cupos;
-
-	}
-
-	public static boolean validarAtraccion(String tipo) {
-		return LISTA_TIPOS.contains(tipo);
 
 	}
 

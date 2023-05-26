@@ -1,14 +1,16 @@
 package data.models;
 
+import java.util.List;
+
 public class Absoluta extends Promocion{
 	
 	private int precioPromo;
 	
 	private int costo;
 	
-	public Absoluta (String nombre, int precio, double duracion, String tipo) {
+	public Absoluta (String nombre, int precio, double duracion, String tipo, List<Atraccion> atracciones) {
 		
-		super(nombre, precio, duracion, tipo);
+		super(nombre, precio, duracion, tipo, atracciones);
 		
 	}
 

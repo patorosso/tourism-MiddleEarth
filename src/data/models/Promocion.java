@@ -5,16 +5,18 @@ import java.util.List;
 
 public abstract class Promocion extends Oferta {
 	
-	protected ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();
+	protected List<Atraccion> atracciones = new ArrayList<Atraccion>();
 	protected int precioTotal;
 	
-	public Promocion(String nombre, int precio, double duracion, String tipo) {
+	public Promocion(String nombre, int precio, double duracion, String tipo, List<Atraccion> atracciones) {
 		super(nombre, precio, duracion, tipo);
 		
 		this.precioTotal = 0;
-		for (Atraccion atraccion : atracciones) {
+		this.atracciones = atracciones;
+		for (Atraccion atraccion : this.atracciones) {
 			this.precioTotal += atraccion.getPrecio();
 		}
+		
 	}
 	
 	public String getNombre() {

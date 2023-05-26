@@ -3,6 +3,7 @@ package data.models;
 import java.util.*;
 
 import data.models.excepcion.AtraccionExcepcion;
+import data.models.excepcion.UsuarioExcepcion;
 
 public class ProbandoOrdenamiento {
 
@@ -19,22 +20,45 @@ public class ProbandoOrdenamiento {
 			ofertas.add(atraccion2);
 			ofertas.add(atraccion3);
 			
-			System.out.println("LISTA ORIGINAL");
-			System.out.println("--------------");
-			for (Oferta oferta : ofertas) {
-				System.out.println(oferta.getNombre());
-			}
+//			System.out.println("LISTA ORIGINAL");
+//			System.out.println("--------------");
+//			for (Oferta oferta : ofertas) {
+//				System.out.println(oferta.getNombre());
+//			}
+//			
+//			//Ofertador.ordenarListaOfertas(ofertas);
+//			
+//			System.out.println("LISTA ORDENADA");
+//			System.out.println("--------------");
+//			for (Oferta oferta : ofertas) {
+//				System.out.println(oferta.getNombre());
+//			}
 			
-			Ofertador.ordenarListaOfertas(ofertas);
+			List<Atraccion> atracciones = new ArrayList<Atraccion>();
 			
-			System.out.println("LISTA ORDENADA");
-			System.out.println("--------------");
-			for (Oferta oferta : ofertas) {
-				System.out.println(oferta.getNombre());
-			}
+			Atraccion atraccion4 = new Atraccion("Atraccion 4", 10, 15.f, 4, "Paisaje");
+			Atraccion atraccion5 = new Atraccion("Atraccion 5", 8, 12.f, 4, "Aventura"); 
+			Atraccion atraccion6 = new Atraccion("Atraccion 6", 12, 18.f, 4, "Degustacion"); 
+			
+			atracciones.add(atraccion4);
+			atracciones.add(atraccion5);
+			atracciones.add(atraccion6);
+			
+			Promocion promo1 = new Absoluta("Pack aventura",150,2.5,"Aventura",atracciones);
+			
+			ofertas.add(promo1);
+			
+			Usuario user = new Usuario("Frodo",25,100,"Aventura");
+			
+			Sistema system = new Sistema(user,ofertas);
+			
+			system.ofertarActividades();
+			
 			
 		} catch (AtraccionExcepcion e) {
 			System.out.println("HOLA" + e.getMessage());
+		}catch(UsuarioExcepcion e) {
+			System.err.println("Usuario error");
 		}
 		
 
