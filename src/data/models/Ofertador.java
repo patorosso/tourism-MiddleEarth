@@ -5,25 +5,34 @@ import data.models.excepcion.*;
 
 public class Ofertador implements IteratorOferta {
 
-	private List<Usuario> usuarios;
+	private Usuario usuario;
 	private List<Oferta>  ofertas;
 	private int indice;
 	
 
 	// Podria ser un singleton
 
-	public Ofertador(List<Usuario> usuarios, List<Oferta> ofertas) throws OfertadorExcepcion {
+	public Ofertador(Usuario usuario, List<Oferta> ofertas) throws OfertadorExcepcion {
 		
-		if(usuarios.isEmpty())
-			throw new OfertadorExcepcion("No hay usuarios");
+		if(usuario == null)
+			throw new OfertadorExcepcion("No hay usuario");
 		
 		if(ofertas.isEmpty())
 			throw new OfertadorExcepcion("No hay ofertas");
 		
-		this.usuarios = usuarios;
-		this.ofertas = ofertas;
+		this.ordenarListaOfertas(ofertas);
+		
+		this.usuario = usuario;
 		this.indice = 0;
+		this.ofertas = ofertas;
 	}	
+	
+	public static void ordenarListaOfertas(List<Oferta> ofertas) {
+		Collections.sort(ofertas);
+	}
+	
+	
+	
 
 	@Override
 	public boolean tieneSiguienteOferta() {
