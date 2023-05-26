@@ -1,6 +1,6 @@
 package data.models;
 
-public abstract class Oferta {
+public abstract class Oferta implements Comparable<Oferta> {
 
 	protected String nombre;
 	protected int costo;
@@ -35,6 +35,30 @@ public abstract class Oferta {
 
 	public void setDuracion(double duracion) {
 		this.duracion = duracion;
+	}
+	
+	@Override
+	public int compareTo(Oferta oferta) {
+		
+		Object ofertaActual = this.getClass();
+		Object ofertaNueva = oferta.getClass();
+		
+		//Una promocion se prioriza sobre una atraccion
+		if(ofertaActual == Promocion.class && ofertaNueva == Atraccion.class) {
+			return -1;
+		}
+		
+		if(ofertaActual == Atraccion.class && ofertaNueva == Promocion.class) {
+			return 1;
+		}
+		
+		//Se prioriza la mayor duracion y costo
+		if(this.duracion + this.costo > oferta.duracion + oferta.costo)
+			return -1;
+		if(this.duracion + this.costo < oferta.duracion + oferta.costo)
+			return 1;
+		
+		return 1;
 	}
 
 }
