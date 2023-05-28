@@ -36,7 +36,7 @@ public class ProbandoOrdenamiento {
 			
 			List<Atraccion> atracciones = new ArrayList<Atraccion>();
 			
-			Atraccion atraccion4 = new Atraccion("Atraccion 4", 10, 15.f, 4, "Paisaje");
+			Atraccion atraccion4 = new Atraccion("Atraccion 1", 10, 15.f, 4, "Paisaje");
 			Atraccion atraccion5 = new Atraccion("Atraccion 5", 8, 12.f, 4, "Aventura"); 
 			Atraccion atraccion6 = new Atraccion("Atraccion 6", 12, 18.f, 4, "Degustacion"); 
 			
@@ -57,6 +57,23 @@ public class ProbandoOrdenamiento {
 			Sistema system = new Sistema(usuarios,ofertas);
 			
 			system.ofertarActividades();
+			
+			System.out.println("\n\n");
+			System.out.println("Resumen:\n\n");
+			System.out.println("Monedas del usuario:" + user.getMonedas());
+			System.out.println("Tiempo del usuario: " + user.getTiempo());
+			for (Oferta oferta : user.getOfertasCompradas()) {
+				System.out.println("Nombre de oferta: " + oferta.getNombre() + "\n\n");
+				
+				
+				Object ofertaAClasificar = oferta.getClass().getSuperclass();
+				if (ofertaAClasificar != Promocion.class)
+				{
+					Atraccion atraccionTemporal = (Atraccion) oferta;
+					System.out.println("Cupos de la atraccion: " + atraccionTemporal.getCupos() + "\n\n");
+				}
+				
+			}
 			
 			
 		} catch (AtraccionExcepcion e) {
