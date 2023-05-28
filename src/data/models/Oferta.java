@@ -69,8 +69,5 @@ public abstract class Oferta implements Comparable<Oferta> {
 		this.duracion = duracion;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
 
 }
