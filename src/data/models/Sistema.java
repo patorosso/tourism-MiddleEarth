@@ -62,7 +62,6 @@ public class Sistema {
 							System.out.println("Acepta sugerencia? Ingrese S o N");
 							input = scanner.next().toUpperCase().charAt(0);
 						} while (input != 'S' && input != 'N');
-						
 
 						if (input == 'S') {
 							usuario.agregarCompra(oferta);
@@ -78,14 +77,13 @@ public class Sistema {
 						System.out.println("Atraccion: [" + atraccionTemporal.getNombre() + "]");
 						System.out.println("- Precio: $" + atraccionTemporal.getPrecio());
 						System.out.println("- Duracion: " + atraccionTemporal.getDuracion());
-						
+
 						Scanner scanner = new Scanner(System.in);
 						char input;
 						do {
 							System.out.println("Acepta sugerencia? Ingrese S o N");
 							input = scanner.next().toUpperCase().charAt(0);
 						} while (input != 'S' && input != 'N');
-						
 
 						if (input == 'S') {
 							usuario.agregarCompra(oferta);
@@ -96,9 +94,9 @@ public class Sistema {
 
 						System.out.println("------------------------");
 					}
-					
+
 				}
-				
+
 			}
 
 		} catch (OfertadorExcepcion e) {

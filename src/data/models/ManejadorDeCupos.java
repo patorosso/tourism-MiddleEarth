@@ -2,7 +2,6 @@ package data.models;
 
 public class ManejadorDeCupos {
 
-
 	public static boolean tengoCupoPara(final Oferta oferta) {
 		Object ofertaAClasificar;
 
@@ -28,7 +27,7 @@ public class ManejadorDeCupos {
 	}
 
 	public static void restarCupo(final Oferta oferta) {
-		
+
 		Object ofertaAClasificar;
 
 		ofertaAClasificar = oferta.getClass().getSuperclass();
@@ -43,15 +42,15 @@ public class ManejadorDeCupos {
 			}
 
 		} else {
-			
+
 			Atraccion atraccionTemporal = (Atraccion) oferta;
-			
+
 			int cupos = atraccionTemporal.getCupos();
 			if (cupos > 0)
 				atraccionTemporal.setCupos(cupos - 1);
 
 		}
-		
+
 	}
-	
+
 }
