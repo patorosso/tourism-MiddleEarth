@@ -15,13 +15,14 @@ public class Usuario {
 
 	public Usuario(String nombre, int monedas, double tiempo, String preferencia) throws UsuarioExcepcion {
 
-		// Tal vez sea necesario un throw para cada parametro, para especificar cada
-		// mensaje.
-		if ((nombre == null || nombre == "") || (preferencia == null || preferencia == null))
-			throw new UsuarioExcepcion("Sin nombre o preferencia");
-
-		if (monedas < 0 || tiempo < 0)
-			throw new UsuarioExcepcion("Monedas o tiempo negativo");
+		if (nombre == null || nombre == "")
+			throw new UsuarioExcepcion("Usuario sin nombre.");
+		if (preferencia == null || preferencia == "")
+			throw new UsuarioExcepcion("Usuario sin preferencia.");
+		if (monedas < 0)
+			throw new UsuarioExcepcion("La cantidad de monedas del usuario debe ser positiva.");
+		if (tiempo < 0)
+			throw new UsuarioExcepcion("El tiempo disponible del usuario debe ser positivo.");
 
 		this.nombre = nombre;
 		this.monedas = monedas;
@@ -85,10 +86,5 @@ public class Usuario {
 	public void agregarCompra(Oferta oferta) {
 		ofertasCompradas.add(oferta);
 	}
-
-//	@Override
-//	public void comprarOferta(Oferta oferta) {
-//
-//	}
 
 }
