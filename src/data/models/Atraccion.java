@@ -34,10 +34,6 @@ public class Atraccion extends Oferta {
 		this.cupos = cupos;
 	}
 
-	public String getTipo() {
-		return tipo;
-	}
-
 	public void setTipo(String tipo) throws AtraccionExcepcion {
 		if (!LISTA_TIPOS.contains(tipo))
 			throw new AtraccionExcepcion("La atraccion no es valida.");
