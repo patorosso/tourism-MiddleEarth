@@ -21,13 +21,13 @@ public class Sistema {
 		try {
 
 			for (Usuario usuario : usuarios) {
-				System.out.println("Bienvenido " + usuario.getNombre());
-
+				
+				System.out.println("Bienvenido " + usuario.getNombre()); //esto quizas no va
 				Ofertador ofertador = new Ofertador(usuario, ofertas);
+				
 				while (ofertador.tieneSiguienteOferta()) {
 
 					Oferta oferta = ofertador.siguienteOferta();
-
 					Object ofertaAClasificar;
 
 					// Puede ser Absoluta, AxB o Porcentual, pero las trato mas facil como
@@ -100,7 +100,7 @@ public class Sistema {
 			}
 
 		} catch (OfertadorExcepcion e) {
-			System.err.println("[Error capturado] " + e.getMessage());
+			System.err.println("[Error capturado ofertador] " + e.getMessage());
 		} catch (UsuarioExcepcion e) {
 			System.out.println("[Error capturado usuario]" + e.getMessage());
 		}
