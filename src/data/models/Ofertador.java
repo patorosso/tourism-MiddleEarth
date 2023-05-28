@@ -3,13 +3,13 @@ package data.models;
 import java.util.*;
 import data.models.excepcion.*;
 
-public class Ofertador {
+public class Ofertador implements IteratorOferta {
 
 	private Usuario usuario;
 	private List<Oferta> ofertasPreferencias;
 	private List<Oferta> ofertasNoPreferencias;
-
-	// Podria ser un singleton
+	private int indice;
+	private Compra compras;
 
 	public Ofertador(Usuario usuario, List<Oferta> ofertas) throws OfertadorExcepcion {
 
@@ -21,9 +21,15 @@ public class Ofertador {
 
 		this.usuario = usuario;
 		this.ofertasPreferencias = ofertas;
+		this.ofertasNoPreferencias = new ArrayList<Oferta>();
+		this.indice = 0;
+		this.compras = new Compra();
 
 		this.ordenarListaOfertas(this.ofertasPreferencias);
 		this.dividirListas(this.ofertasPreferencias, this.ofertasNoPreferencias, this.usuario);
+
+		// Todas las ofertas se encuentran en una sola lista
+		ofertasPreferencias.addAll(ofertasNoPreferencias);
 
 	}
 
@@ -32,11 +38,9 @@ public class Ofertador {
 	}
 
 	private void dividirListas(List<Oferta> ofertasPreferencias, List<Oferta> ofertasNoPreferencias, Usuario usuario) {
-
-		ofertasNoPreferencias = new ArrayList<Oferta>();
-		// Se deberia crear un iterador propio
+		
+		// ¿Se deberia crear un iterador propio?
 		Iterator<Oferta> itOferta = ofertasPreferencias.iterator();
-
 		while (itOferta.hasNext()) {
 
 			Oferta ofertaTemporal = itOferta.next();
@@ -48,54 +52,41 @@ public class Ofertador {
 
 			}
 		}
+		
+//		for (Oferta oferta : ofertasPreferencias) {
+//			ofertasPreferencias.remove(oferta);
+//		}
 	}
 
-	public void ofertar() {
-		Object ofertaAClasificar;
+	@Override
+	public boolean tieneSiguienteOferta() {
 
-		System.out.println("Bienvenido " + usuario.getNombre());
-		for (Oferta oferta : ofertasPreferencias) {
+		if(this.indice >= this.ofertasPreferencias.size())
+			return false;
+		if(usuario.getTiempo() < this.ofertasPreferencias.get(this.indice).getDuracion())
+			return false;
+		if(usuario.getMonedas() < this.ofertasPreferencias.get(this.indice).getPrecio())
+			return false;
+		if(!ManejadorDeCupos.tengoCupoPara(this.ofertasPreferencias.get(this.indice)))
+			return false;
+		if(compras.getOfertasCompradas() != null && compras.getOfertasCompradas().contains(this.ofertasPreferencias.get(this.indice)))
+			return false;
+		
+	
+		return true;
+	}
 
-			// Puede ser absoluta, axb o porcentual, pero las trato mas facil como
-			// Promocion.
-			ofertaAClasificar = oferta.getClass().getSuperclass();
+	@Override
+	public Oferta siguienteOferta() {
 
-			if (ofertaAClasificar == Promocion.class) {
-				Promocion promoTemporal = (Promocion) oferta;
-
-				System.out.println("Promocion: " + promoTemporal.getNombre());
-				System.out.print("- Atracciones incluidas: [ ");
-
-				for (Atraccion atracciones : promoTemporal.getAtracciones()) {
-					System.out.print(atracciones.getNombre() + ", ");
-
-				}
-				System.out.println("]");
-
-				System.out.print("- Precio original: ");
-				System.out.println("$" + promoTemporal.getPrecio());
-
-				System.out.print("- Duracion: ");
-				System.out.println(promoTemporal.getDuracion());
-				
-				
-				
-				//Lógica ¿acepta sugerencia?
-
-
-				System.out.println("");
-				System.out.println("------------------------");
-			} else {
-
-				Atraccion atraccionTemporal = (Atraccion) oferta;
-				System.out.println("Atraccion: " + atraccionTemporal.getNombre());
-
-			}
-
-		}
+		if(!this.tieneSiguienteOferta()) 
+			return null;
+		
+		// Podría ser al revez
+		
+		Oferta oferta = this.ofertasPreferencias.get(this.indice);
+		this.indice ++;
+		return oferta;
 	}
 
 }
-
-//if ((ofertaAClasificar == Absoluta.class) || (ofertaAClasificar == AXB.class)
-//		|| (ofertaAClasificar == Porcentual.class))

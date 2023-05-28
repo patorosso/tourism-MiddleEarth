@@ -48,9 +48,13 @@ public class ProbandoOrdenamiento {
 			
 			ofertas.add(promo1);
 			
-			Usuario user = new Usuario("Frodo",25,100,"Aventura");
+			List<Usuario> usuarios = new ArrayList<Usuario>();
 			
-			Sistema system = new Sistema(user,ofertas);
+			Usuario user = new Usuario("Frodo",1125,1000,"Aventura");
+			
+			usuarios.add(user);
+			
+			Sistema system = new Sistema(usuarios,ofertas);
 			
 			system.ofertarActividades();
 			
