@@ -2,12 +2,16 @@ package data.models;
 
 import data.models.excepcion.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Usuario {
 
 	private String nombre;
 	private int monedas;
 	private double tiempo;
 	private String preferencia;
+	private List<Oferta> ofertasCompradas;
 
 	public Usuario(String nombre, int monedas, double tiempo, String preferencia) throws UsuarioExcepcion {
 
@@ -23,6 +27,7 @@ public class Usuario {
 		this.monedas = monedas;
 		this.tiempo = tiempo;
 		this.preferencia = preferencia;
+		this.ofertasCompradas = new ArrayList<Oferta>();
 	}
 
 	public void consumirMonedas(int cant) throws UsuarioExcepcion {
@@ -72,5 +77,14 @@ public class Usuario {
 	public void setPreferencia(String preferencia) {
 		this.preferencia = preferencia;
 	}
+
+	public List<Oferta> getOfertasCompradas() {
+		return ofertasCompradas;
+	}
+
+//	@Override
+//	public void comprarOferta(Oferta oferta) {
+//
+//	}
 
 }

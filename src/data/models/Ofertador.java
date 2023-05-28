@@ -9,7 +9,6 @@ public class Ofertador implements IteratorOferta {
 	private List<Oferta> ofertasPreferencias;
 	private List<Oferta> ofertasNoPreferencias;
 	private int indice;
-	private Compra compras;
 
 	public Ofertador(Usuario usuario, List<Oferta> ofertas) throws OfertadorExcepcion {
 
@@ -23,7 +22,6 @@ public class Ofertador implements IteratorOferta {
 		this.ofertasPreferencias = ofertas;
 		this.ofertasNoPreferencias = new ArrayList<Oferta>();
 		this.indice = 0;
-		this.compras = new Compra();
 
 		this.ordenarListaOfertas(this.ofertasPreferencias);
 		this.dividirListas(this.ofertasPreferencias, this.ofertasNoPreferencias, this.usuario);
@@ -38,7 +36,7 @@ public class Ofertador implements IteratorOferta {
 	}
 
 	private void dividirListas(List<Oferta> ofertasPreferencias, List<Oferta> ofertasNoPreferencias, Usuario usuario) {
-		
+
 		// ¿Se deberia crear un iterador propio?
 		Iterator<Oferta> itOferta = ofertasPreferencias.iterator();
 		while (itOferta.hasNext()) {
@@ -52,7 +50,7 @@ public class Ofertador implements IteratorOferta {
 
 			}
 		}
-		
+
 //		for (Oferta oferta : ofertasPreferencias) {
 //			ofertasPreferencias.remove(oferta);
 //		}
@@ -61,31 +59,31 @@ public class Ofertador implements IteratorOferta {
 	@Override
 	public boolean tieneSiguienteOferta() {
 
-		if(this.indice >= this.ofertasPreferencias.size())
+		if (this.indice >= this.ofertasPreferencias.size())
 			return false;
-		if(usuario.getTiempo() < this.ofertasPreferencias.get(this.indice).getDuracion())
+		if (usuario.getTiempo() < this.ofertasPreferencias.get(this.indice).getDuracion())
 			return false;
-		if(usuario.getMonedas() < this.ofertasPreferencias.get(this.indice).getPrecio())
+		if (usuario.getMonedas() < this.ofertasPreferencias.get(this.indice).getPrecio())
 			return false;
-		if(!ManejadorDeCupos.tengoCupoPara(this.ofertasPreferencias.get(this.indice)))
+		if (!ManejadorDeCupos.tengoCupoPara(this.ofertasPreferencias.get(this.indice)))
 			return false;
-		if(compras.getOfertasCompradas() != null && compras.getOfertasCompradas().contains(this.ofertasPreferencias.get(this.indice)))
+		if (this.usuario.getOfertasCompradas() != null
+				&& this.usuario.getOfertasCompradas().contains(this.ofertasPreferencias.get(this.indice)))
 			return false;
-		
-	
+
 		return true;
 	}
 
 	@Override
 	public Oferta siguienteOferta() {
 
-		if(!this.tieneSiguienteOferta()) 
+		if (!this.tieneSiguienteOferta())
 			return null;
-		
+
 		// Podría ser al revez
-		
+
 		Oferta oferta = this.ofertasPreferencias.get(this.indice);
-		this.indice ++;
+		this.indice++;
 		return oferta;
 	}
 

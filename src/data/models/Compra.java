@@ -2,20 +2,10 @@ package data.models;
 
 import java.util.*;
 
-public class Compra {
-	
-	private List<Oferta> ofertasCompradas;
-	
-	public Compra() {
+public interface Compra {
 
-		ofertasCompradas = new ArrayList<Oferta>();
-	}
-	
-	public void comprarOferta(Oferta oferta) {
-		ofertasCompradas.add(oferta);
-	}
-	
-	public List<Oferta> getOfertasCompradas(){
-		return ofertasCompradas;
-	}
+//	void comprarOferta(Oferta oferta);
+//
+//	public List<Oferta> getCompras();
+
 }
