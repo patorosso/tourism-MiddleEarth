@@ -27,7 +27,7 @@ public class ManejadorDeCupos {
 		return true;
 	}
 
-	public void restarCupo(final Oferta oferta) {
+	public static void restarCupo(final Oferta oferta) {
 		
 		Object ofertaAClasificar;
 

@@ -81,6 +81,10 @@ public class Usuario {
 	public List<Oferta> getOfertasCompradas() {
 		return ofertasCompradas;
 	}
+	
+	public void agregarCompra(Oferta oferta) {
+		ofertasCompradas.add(oferta);
+	}
 
 //	@Override
 //	public void comprarOferta(Oferta oferta) {
