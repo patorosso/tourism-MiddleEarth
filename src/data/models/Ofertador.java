@@ -59,7 +59,7 @@ public class Ofertador implements IteratorOferta {
 	@Override
 	public boolean tieneSiguienteOferta() {
 
-		if (this.indice >= this.ofertasPreferencias.size())
+		if (this.indice == this.ofertasPreferencias.size())
 			return false;
 		if (usuario.getTiempo() < this.ofertasPreferencias.get(this.indice).getDuracion())
 			return false;
@@ -78,9 +78,7 @@ public class Ofertador implements IteratorOferta {
 	public Oferta siguienteOferta() {
 
 		if (!this.tieneSiguienteOferta())
-			return null;
-
-		// Podría ser al revez
+			return null; //NoSuchElementException quiza devolver
 
 		Oferta oferta = this.ofertasPreferencias.get(this.indice);
 		this.indice++;
