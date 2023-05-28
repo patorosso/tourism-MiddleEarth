@@ -23,16 +23,10 @@ public class Ofertador implements IteratorOferta {
 		this.ofertasNoPreferencias = new ArrayList<Oferta>();
 		this.indice = 0;
 
-		this.ordenarListaOfertas(this.ofertasPreferencias);
+		Collections.sort(ofertas); // this.ordenarListaOfertas(this.ofertasPreferencias) era una sola línea
 		this.dividirListas(this.ofertasPreferencias, this.ofertasNoPreferencias, this.usuario);
-
-		// Todas las ofertas se encuentran en una sola lista
 		ofertasPreferencias.addAll(ofertasNoPreferencias);
 
-	}
-
-	private void ordenarListaOfertas(List<Oferta> ofertas) {
-		Collections.sort(ofertas);
 	}
 
 	private void dividirListas(List<Oferta> ofertasPreferencias, List<Oferta> ofertasNoPreferencias, Usuario usuario) {
@@ -44,16 +38,10 @@ public class Ofertador implements IteratorOferta {
 			Oferta ofertaTemporal = itOferta.next();
 
 			if (ofertaTemporal != null && !ofertaTemporal.getTipo().equals(usuario.getPreferencia())) {
-
 				ofertasNoPreferencias.add(ofertaTemporal);
 				itOferta.remove();
-
 			}
 		}
-
-//		for (Oferta oferta : ofertasPreferencias) {
-//			ofertasPreferencias.remove(oferta);
-//		}
 	}
 
 	@Override
@@ -78,7 +66,7 @@ public class Ofertador implements IteratorOferta {
 	public Oferta siguienteOferta() {
 
 		if (!this.tieneSiguienteOferta())
-			return null; //NoSuchElementException quiza devolver
+			return null; // NoSuchElementException quiza devolver
 
 		Oferta oferta = this.ofertasPreferencias.get(this.indice);
 		this.indice++;

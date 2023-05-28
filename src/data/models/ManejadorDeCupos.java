@@ -14,15 +14,13 @@ public class ManejadorDeCupos {
 				if (atracciones.getCupos() == 0)
 					return false;
 			}
-
 		} else {
 
 			Atraccion atraccionTemporal = (Atraccion) oferta;
+
 			if (atraccionTemporal.getCupos() == 0)
 				return false;
-
 		}
-
 		return true;
 	}
 
