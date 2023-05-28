@@ -19,23 +19,9 @@ public abstract class Promocion extends Oferta {
 
 	}
 
-	public String getNombre() {
-		return nombre;
+	public int getPrecioTotal() {
+		return precioTotal;
 	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-//	public double getCosto() {
-//		return costo;
-//	}
-//	public void setCosto(double costo) {
-//		this.costo = costo;
-//	}
 
 	public List<Atraccion> getAtracciones() {
 		return atracciones;
