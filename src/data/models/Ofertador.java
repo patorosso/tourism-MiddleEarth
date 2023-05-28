@@ -6,8 +6,7 @@ import data.models.excepcion.*;
 public class Ofertador implements IteratorOferta {
 
 	private Usuario usuario;
-	private List<Oferta> ofertasPreferencias;
-	private List<Oferta> ofertasNoPreferencias;
+	private List<Oferta> ofertas;
 	private int indice;
 
 	public Ofertador(Usuario usuario, List<Oferta> ofertas) throws OfertadorExcepcion {
@@ -19,44 +18,45 @@ public class Ofertador implements IteratorOferta {
 			throw new OfertadorExcepcion("No hay ofertas");
 
 		this.usuario = usuario;
-		this.ofertasPreferencias = ofertas;
-		this.ofertasNoPreferencias = new ArrayList<Oferta>();
+		this.ofertas = ofertas;
 		this.indice = 0;
-
-		Collections.sort(ofertas); // this.ordenarListaOfertas(this.ofertasPreferencias) era una sola línea
-		this.dividirListas(this.ofertasPreferencias, this.ofertasNoPreferencias, this.usuario);
-		ofertasPreferencias.addAll(ofertasNoPreferencias);
-
+		
+		ordenarLista(this.ofertas);
+		
 	}
-
-	private void dividirListas(List<Oferta> ofertasPreferencias, List<Oferta> ofertasNoPreferencias, Usuario usuario) {
-
-		// ¿Se deberia crear un iterador propio?
-		Iterator<Oferta> itOferta = ofertasPreferencias.iterator();
+	
+	private void ordenarLista(List<Oferta> ofertas) {
+		
+		Collections.sort(ofertas);
+		List<Oferta> ofertasSinPreferencias = new ArrayList<Oferta>();
+		
+		Iterator<Oferta> itOferta = ofertas.iterator();
 		while (itOferta.hasNext()) {
 
 			Oferta ofertaTemporal = itOferta.next();
 
 			if (ofertaTemporal != null && !ofertaTemporal.getTipo().equals(usuario.getPreferencia())) {
-				ofertasNoPreferencias.add(ofertaTemporal);
+				ofertasSinPreferencias.add(ofertaTemporal);
 				itOferta.remove();
 			}
 		}
+		
+		this.ofertas.addAll(ofertasSinPreferencias); //Juntamos ambas listas en la lista ofertas original.
 	}
 
 	@Override
 	public boolean tieneSiguienteOferta() {
 
-		if (this.indice == this.ofertasPreferencias.size())
+		if (this.indice == this.ofertas.size())
 			return false;
-		if (usuario.getTiempo() < this.ofertasPreferencias.get(this.indice).getDuracion())
+		if (usuario.getTiempo() < this.ofertas.get(this.indice).getDuracion())
 			return false;
-		if (usuario.getMonedas() < this.ofertasPreferencias.get(this.indice).getPrecio())
+		if (usuario.getMonedas() < this.ofertas.get(this.indice).getPrecio())
 			return false;
-		if (!ManejadorDeCupos.tengoCupoPara(this.ofertasPreferencias.get(this.indice)))
+		if (!ManejadorDeCupos.tengoCupoPara(this.ofertas.get(this.indice)))
 			return false;
 		if (this.usuario.getOfertasCompradas() != null
-				&& this.usuario.getOfertasCompradas().contains(this.ofertasPreferencias.get(this.indice)))
+				&& this.usuario.getOfertasCompradas().contains(this.ofertas.get(this.indice)))
 			return false;
 
 		return true;
@@ -66,9 +66,9 @@ public class Ofertador implements IteratorOferta {
 	public Oferta siguienteOferta() {
 
 		if (!this.tieneSiguienteOferta())
-			return null; // NoSuchElementException quiza devolver
+			return null; 
 
-		Oferta oferta = this.ofertasPreferencias.get(this.indice);
+		Oferta oferta = this.ofertas.get(this.indice);
 		this.indice++;
 		return oferta;
 	}
