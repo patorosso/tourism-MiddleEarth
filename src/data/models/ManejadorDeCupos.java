@@ -1,6 +1,10 @@
 package data.models;
 
 public class ManejadorDeCupos {
+	
+	private ManejadorDeCupos() {
+		
+	}
 
 	public static boolean tengoCupoPara(final Oferta oferta) {
 		Object ofertaAClasificar;
