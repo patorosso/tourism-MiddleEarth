@@ -11,6 +11,7 @@ public class ProbandoOrdenamiento {
 
 		try {
 			
+			//Lista de ofertas
 			List<Oferta> ofertas = new ArrayList<Oferta>();
 			
 			//Atracciones
@@ -38,9 +39,8 @@ public class ProbandoOrdenamiento {
 			usuarios.add(user);
 
 			
-			
-			
-			
+	
+			//Se comienza el proceso instanciando al Sistema con la lista de usuarios y ofertas
 			Sistema system = new Sistema(usuarios, ofertas);
 			system.ofertarActividades();
 			
