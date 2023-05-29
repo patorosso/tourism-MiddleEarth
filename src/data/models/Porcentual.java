@@ -4,16 +4,15 @@ import java.util.List;
 
 public class Porcentual extends Promocion {
 
-	private int porcentaje;
-//	private int costo;
+	private double porcentaje = 0.2;
 
-	public Porcentual(String nombre, int precio, double duracion, String tipo, List<Atraccion> atracciones) {
+	public Porcentual(String nombre, double duracion, String tipo, List<Atraccion> atracciones) {
 
-		super(nombre, precio, duracion, tipo, atracciones);
+		super(nombre, duracion, tipo, atracciones);
 
 	}
 
-	public int getPorcentaje() {
+	public double getPorcentaje() {
 		return porcentaje;
 	}
 
@@ -21,11 +20,15 @@ public class Porcentual extends Promocion {
 		this.porcentaje = porcentaje;
 	}
 
-//	public int getCosto() {
-//		return costo;
-//	}
-//	public void setCosto(int costo) {
-//		this.costo = costo;
-//	}
+	public void aplicarDescuento() {
+
+		int suma = 0;
+		for (Atraccion atraccion : atracciones)
+			suma += atraccion.getPrecio();
+		
+		precioSinDescuento = suma;
+		suma *= porcentaje;
+		this.precioFinal = suma;
+	}
 
 }

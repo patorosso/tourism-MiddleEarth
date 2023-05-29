@@ -6,25 +6,27 @@ import java.util.List;
 public abstract class Promocion extends Oferta {
 
 	protected List<Atraccion> atracciones = new ArrayList<Atraccion>();
-	protected int precioTotal;
+	protected int precioSinDescuento;
 
-	public Promocion(String nombre, int precio, double duracion, String tipo, List<Atraccion> atracciones) {
-		super(nombre, precio, duracion, tipo);
+	public Promocion(String nombre, double duracion, String tipo, List<Atraccion> atracciones) {
+		super(nombre, duracion, tipo);
 
-		this.precioTotal = 0;
+		this.precioSinDescuento = 0;
 		this.atracciones = atracciones;
 		for (Atraccion atraccion : this.atracciones) {
-			this.precioTotal += atraccion.getPrecio();
+			this.precioSinDescuento += atraccion.getPrecio();
 		}
 
 	}
 
-	public int getPrecioTotal() {
-		return precioTotal;
+	public int getPrecioSinDescuento() {
+		return precioSinDescuento;
 	}
 
 	public List<Atraccion> getAtracciones() {
 		return atracciones;
 	}
+
+	public abstract void aplicarDescuento();
 
 }

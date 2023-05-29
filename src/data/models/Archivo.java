@@ -2,15 +2,9 @@ package data.models;
 
 import data.models.excepcion.AtraccionExcepcion;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Scanner;
-import java.util.StringTokenizer;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
+
 
 public class Archivo {
 	private String nombre; // esto es necesario?

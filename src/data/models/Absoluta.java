@@ -4,30 +4,23 @@ import java.util.List;
 
 public class Absoluta extends Promocion {
 
-	private int precioPromo;
+	private int montoADescontar = 400;
 
-	private int costo;
+	public Absoluta(String nombre, double duracion, String tipo, List<Atraccion> atracciones) {
 
-	public Absoluta(String nombre, int precio, double duracion, String tipo, List<Atraccion> atracciones) {
-
-		super(nombre, precio, duracion, tipo, atracciones);
+		super(nombre, duracion, tipo, atracciones);
 
 	}
 
-	public int getPrecioPromo() {
-		return precioPromo;
-	}
+	public void aplicarDescuento() {
 
-	public void setPrecioPromo(int precioPromo) {
-		this.precioPromo = precioPromo;
-	}
+		int suma = 0;
+		for (Atraccion atraccion : atracciones)
+			suma += atraccion.getPrecio();
 
-//	public int getCosto() {
-//		return costo;
-//	}
-//
-//	public void setCosto(int costo) {
-//		this.costo = costo;
-//	}
+		precioSinDescuento = suma;
+		suma -= montoADescontar;
+		this.precioFinal = suma;
+	}
 
 }

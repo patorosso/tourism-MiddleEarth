@@ -11,9 +11,9 @@ public class Atraccion extends Oferta {
 	private static final List<String> LISTA_TIPOS = new ArrayList<String>(
 			Arrays.asList("Aventura", "Degustacion", "Paisaje"));
 
-	public Atraccion(String nombre, int precio, float duracion, int cupos, String tipo) throws AtraccionExcepcion {
+	public Atraccion(String nombre, int precioFinal, float duracion, int cupos, String tipo) throws AtraccionExcepcion {
 
-		super(nombre, precio, duracion, tipo);
+		super(nombre, duracion, tipo);
 
 		if (cupos < 0)
 			throw new AtraccionExcepcion("Cupos negativo");
@@ -23,6 +23,7 @@ public class Atraccion extends Oferta {
 		}
 
 		this.cupos = cupos;
+		this.precioFinal = precioFinal;
 
 	}
 

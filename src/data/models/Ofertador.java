@@ -9,7 +9,7 @@ public class Ofertador implements IteratorOferta {
 	private List<Oferta> ofertas;
 	private int indice;
 
-	public Ofertador(Usuario usuario, List<Oferta> ofertas) throws OfertadorExcepcion {
+	public Ofertador(List<Oferta> ofertas, Usuario usuario) throws OfertadorExcepcion {
 
 		if (usuario == null)
 			throw new OfertadorExcepcion("No hay usuario");

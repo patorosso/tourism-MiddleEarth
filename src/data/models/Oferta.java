@@ -3,14 +3,13 @@ package data.models;
 public abstract class Oferta implements Comparable<Oferta> {
 
 	protected String nombre;
-	protected int precio;
+	protected int precioFinal;
 	protected double duracion;
 	protected String tipo;
 
-	public Oferta(String nombre, int precio, double duracion, String tipo) {
+	public Oferta(String nombre, double duracion, String tipo) {
 
 		this.nombre = nombre;
-		this.precio = precio;
 		this.duracion = duracion;
 		this.tipo = tipo;
 	}
@@ -33,12 +32,18 @@ public abstract class Oferta implements Comparable<Oferta> {
 		}
 
 		// Se prioriza la mayor duracion y costo
-		if (this.duracion + this.precio > oferta.duracion + oferta.precio)
+		if (this.duracion + this.precioFinal > oferta.duracion + oferta.precioFinal)
 			return -1;
-		if (this.duracion + this.precio < oferta.duracion + oferta.precio)
+		if (this.duracion + this.precioFinal < oferta.duracion + oferta.precioFinal)
 			return 1;
 
 		return 0;
+	}
+
+	public boolean esPromocion() {
+
+		return this.getClass().getSuperclass() == Promocion.class;
+
 	}
 
 	public String getNombre() {
@@ -46,7 +51,7 @@ public abstract class Oferta implements Comparable<Oferta> {
 	}
 
 	public int getPrecio() {
-		return precio;
+		return precioFinal;
 	}
 
 	public double getDuracion() {
@@ -62,12 +67,11 @@ public abstract class Oferta implements Comparable<Oferta> {
 	}
 
 	public void setPrecio(int costo) {
-		this.precio = costo;
+		this.precioFinal = costo;
 	}
 
 	public void setDuracion(double duracion) {
 		this.duracion = duracion;
 	}
-
 
 }

@@ -18,22 +18,22 @@ public class Sistema {
 	}
 
 	public void ofertarActividades() {
+
+		System.out.println("Bienvenido a la Tierra Media");
+		System.out.println("------------------------");
+
 		try {
 
 			for (Usuario usuario : usuarios) {
-				
-				System.out.println("Bienvenido " + usuario.getNombre()); //esto quizas no va
-				Ofertador ofertador = new Ofertador(usuario, ofertas);
-				
+
+				System.out.println("Nombre visitante: " + usuario.getNombre());
+				Ofertador ofertador = new Ofertador(ofertas, usuario);
+
 				while (ofertador.tieneSiguienteOferta()) {
 
 					Oferta oferta = ofertador.siguienteOferta();
-					Object ofertaAClasificar;
-
-					// Puede ser Absoluta, AxB o Porcentual, pero las trato mas facil como
-					// Promocion.
-					ofertaAClasificar = oferta.getClass().getSuperclass();
-					if (ofertaAClasificar == Promocion.class) {
+					
+					if (oferta.esPromocion()) {
 						Promocion promoTemporal = (Promocion) oferta;
 
 						System.out.println("Promocion: " + promoTemporal.getNombre());
@@ -82,6 +82,7 @@ public class Sistema {
 						char input;
 						do {
 							System.out.println("Acepta sugerencia? Ingrese S o N");
+
 							input = scanner.next().toUpperCase().charAt(0);
 						} while (input != 'S' && input != 'N');
 
