@@ -32,7 +32,7 @@ public class Sistema {
 				while (ofertador.tieneSiguienteOferta()) {
 
 					Oferta oferta = ofertador.siguienteOferta();
-					
+
 					if (oferta.esPromocion()) {
 						Promocion promoTemporal = (Promocion) oferta;
 
@@ -51,10 +51,16 @@ public class Sistema {
 						System.out.println("]");
 
 						System.out.print("- Precio original: ");
+						System.out.println("$" + promoTemporal.getPrecioSinDescuento());
+
+						System.out.print("- Precio con descuento: ");
 						System.out.println("$" + promoTemporal.getPrecio());
 
 						System.out.print("- Duracion: ");
 						System.out.println(promoTemporal.getDuracion());
+
+						System.out.print("- Tipo:");
+						System.out.println(promoTemporal.getTipo());
 
 						Scanner scanner = new Scanner(System.in);
 						char input;
@@ -68,6 +74,7 @@ public class Sistema {
 							usuario.consumirTiempo(oferta.getDuracion());
 							usuario.consumirMonedas(oferta.getPrecio());
 							ManejadorDeCupos.restarCupo(oferta);
+							System.out.println("Aceptada!");
 						}
 
 						System.out.println("------------------------");
@@ -77,6 +84,8 @@ public class Sistema {
 						System.out.println("Atraccion: [" + atraccionTemporal.getNombre() + "]");
 						System.out.println("- Precio: $" + atraccionTemporal.getPrecio());
 						System.out.println("- Duracion: " + atraccionTemporal.getDuracion());
+						System.out.print("- Tipo:");
+						System.out.println(atraccionTemporal.getTipo());
 
 						Scanner scanner = new Scanner(System.in);
 						char input;

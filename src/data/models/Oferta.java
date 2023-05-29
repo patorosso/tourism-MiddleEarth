@@ -17,19 +17,12 @@ public abstract class Oferta implements Comparable<Oferta> {
 	@Override
 	public int compareTo(Oferta oferta) {
 
-		Object ofertaActual = this.getClass();
-		Object ofertaNueva = oferta.getClass();
-
-		// Las preferencias se priorizan
-
 		// Una promocion se prioriza sobre una atraccion
-		if (ofertaActual == Promocion.class && ofertaNueva == Atraccion.class) {
+		if (this.esPromocion() && !oferta.esPromocion())
 			return -1;
-		}
 
-		if (ofertaActual == Atraccion.class && ofertaNueva == Promocion.class) {
+		if (!this.esPromocion() && oferta.esPromocion())
 			return 1;
-		}
 
 		// Se prioriza la mayor duracion y costo
 		if (this.duracion + this.precioFinal > oferta.duracion + oferta.precioFinal)

@@ -20,16 +20,15 @@ public class Ofertador implements IteratorOferta {
 		this.usuario = usuario;
 		this.ofertas = ofertas;
 		this.indice = 0;
-		
+
 		ordenarLista(this.ofertas);
-		
 	}
-	
+
 	private void ordenarLista(List<Oferta> ofertas) {
-		
+
 		Collections.sort(ofertas);
 		List<Oferta> ofertasSinPreferencias = new ArrayList<Oferta>();
-		
+
 		Iterator<Oferta> itOferta = ofertas.iterator();
 		while (itOferta.hasNext()) {
 
@@ -40,8 +39,8 @@ public class Ofertador implements IteratorOferta {
 				itOferta.remove();
 			}
 		}
-		
-		this.ofertas.addAll(ofertasSinPreferencias); //Juntamos ambas listas en la lista ofertas original.
+
+		this.ofertas.addAll(ofertasSinPreferencias); // Juntamos ambas listas en la lista ofertas original.
 	}
 
 	@Override
@@ -66,7 +65,7 @@ public class Ofertador implements IteratorOferta {
 	public Oferta siguienteOferta() {
 
 		if (!this.tieneSiguienteOferta())
-			return null; 
+			return null;
 
 		Oferta oferta = this.ofertas.get(this.indice);
 		this.indice++;
