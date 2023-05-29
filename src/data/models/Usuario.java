@@ -2,27 +2,33 @@ package data.models;
 
 import data.models.excepcion.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Usuario {
 
 	private String nombre;
 	private int monedas;
 	private double tiempo;
 	private String preferencia;
+	private List<Oferta> ofertasCompradas;
 
 	public Usuario(String nombre, int monedas, double tiempo, String preferencia) throws UsuarioExcepcion {
 
-		// Tal vez sea necesario un throw para cada parametro, para especificar cada
-		// mensaje.
-		if ((nombre == null || nombre == "") || (preferencia == null || preferencia == null))
-			throw new UsuarioExcepcion("Sin nombre o preferencia");
-
-		if (monedas < 0 || tiempo < 0)
-			throw new UsuarioExcepcion("Monedas o tiempo negativo");
+		if (nombre == null || nombre == "")
+			throw new UsuarioExcepcion("Usuario sin nombre.");
+		if (preferencia == null || preferencia == "")
+			throw new UsuarioExcepcion("Usuario sin preferencia.");
+		if (monedas < 0)
+			throw new UsuarioExcepcion("La cantidad de monedas del usuario debe ser positiva.");
+		if (tiempo < 0)
+			throw new UsuarioExcepcion("El tiempo disponible del usuario debe ser positivo.");
 
 		this.nombre = nombre;
 		this.monedas = monedas;
 		this.tiempo = tiempo;
 		this.preferencia = preferencia;
+		this.ofertasCompradas = new ArrayList<Oferta>();
 	}
 
 	public void consumirMonedas(int cant) throws UsuarioExcepcion {
@@ -71,6 +77,14 @@ public class Usuario {
 
 	public void setPreferencia(String preferencia) {
 		this.preferencia = preferencia;
+	}
+
+	public List<Oferta> getOfertasCompradas() {
+		return ofertasCompradas;
+	}
+
+	public void agregarCompra(Oferta oferta) {
+		ofertasCompradas.add(oferta);
 	}
 
 }

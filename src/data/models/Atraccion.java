@@ -6,14 +6,14 @@ import data.models.excepcion.*;
 public class Atraccion extends Oferta {
 
 	private int cupos;
-	private String tipo; // era final, pero hay que chequear como construir y setear.
 
+	// pasar a ofertas
 	private static final List<String> LISTA_TIPOS = new ArrayList<String>(
 			Arrays.asList("Aventura", "Degustacion", "Paisaje"));
 
-	public Atraccion(String nombre, int costo, float duracion, int cupos, String tipo) throws AtraccionExcepcion {
+	public Atraccion(String nombre, int precioFinal, float duracion, int cupos, String tipo) throws AtraccionExcepcion {
 
-		super(nombre, costo, duracion);
+		super(nombre, duracion, tipo);
 
 		if (cupos < 0)
 			throw new AtraccionExcepcion("Cupos negativo");
@@ -23,12 +23,7 @@ public class Atraccion extends Oferta {
 		}
 
 		this.cupos = cupos;
-		this.tipo = tipo;
-
-	}
-
-	public static boolean validarAtraccion(String tipo) {
-		return LISTA_TIPOS.contains(tipo);
+		this.precioFinal = precioFinal;
 
 	}
 
@@ -38,10 +33,6 @@ public class Atraccion extends Oferta {
 
 	public void setCupos(int cupos) {
 		this.cupos = cupos;
-	}
-
-	public String getTipo() {
-		return tipo;
 	}
 
 	public void setTipo(String tipo) throws AtraccionExcepcion {
