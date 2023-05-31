@@ -1,279 +1,77 @@
 package data.models;
 
+import java.util.*;
+
 import data.models.excepcion.AtraccionExcepcion;
 
 import java.io.*;
-import java.util.*;
-
 
 public class Archivo {
-	private String nombre; // esto es necesario?
+
+	private String nombre;
 
 	public Archivo(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public void generaObjectUsuario(Usuario usuario, String[] strArray) {
-
-		int pos = 0;
-		for (int i = 0; i < strArray.length; i++) {
-
-			if (usuario.getNombre() == null && pos == i) {
-				usuario.setNombre(strArray[i]);
-				pos++;
-			}
-
-			if (usuario.getPreferencia() == null && pos == i) {
-				usuario.setPreferencia(strArray[i]);
-				pos++;
-			}
-
-			if (usuario.getMonedas() == 0 && pos == i) {
-				usuario.setMonedas(Integer.parseInt(strArray[i].toString()));
-				pos++;
-			}
-
-			if (usuario.getTiempo() == 0 && pos == i) {
-				usuario.setTiempo(Integer.parseInt(strArray[i].toString()));
-				pos++;
-			}
-
-		}
-	}
-
-	public void generaObjectAtraccion(Atraccion atraccion, String[] strArray) {
-
-		int pos = 0;
+	public void leerArchivo() {
+		Scanner scanner = null;
 
 		try {
-			for (int i = 0; i < strArray.length; i++) {
 
-				if (atraccion.getNombre() == null && pos == i) {
-					atraccion.setNombre(strArray[i]);
-					pos++;
-				}
+			File file = new File("resources/in/" + this.nombre + ".in");
+			scanner = new Scanner(file);
 
-				if (atraccion.getPrecio() == 0 && pos == i) {
-					atraccion.setPrecio(Integer.parseInt(strArray[i].toString()));
-					pos++;
-				}
-
-				if (atraccion.getDuracion() == 0 && pos == i) {
-					atraccion.setDuracion(Double.parseDouble(strArray[i].toString()));
-					pos++;
-				}
-
-				if (atraccion.getCupos() == 0 && pos == i) {
-					atraccion.setCupos(Integer.parseInt(strArray[i].toString()));
-					pos++;
-				}
-
-				if (atraccion.getTipo() == null && pos == i) {
-					atraccion.setTipo(strArray[i]);
-					pos++;
-				}
-
+			if (this.nombre.equals("Usuarios")) {
+				this.parsearUsuario(scanner);
+			} else if (this.nombre.equals("Atracciones")) {
+				this.parsearAtraccion(scanner);
+			} else if (this.nombre.equals("Promociones")) {
+				this.parsearPromocion(scanner);
 			}
-		} catch (NumberFormatException e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (AtraccionExcepcion e) {
-			e.printStackTrace();
+
+		} finally {
+			scanner.close();
 		}
 	}
 
-	// Para cuando este la clase Promocion
-
-//	public void generaObjectPromocion(Promocion promocion, String[] strArray) {
-//
-//		int pos = 0;
-//		for (int i = 0; i < strArray.length; i++) {
-//			 
-//			if(promocion.getNombre() == null && pos == i) {
-//			    promocion.setNombre(strArray[i]);
-//				pos ++;
-//			}
-//			
-//			if(promocion.getIncluye() == null && pos == i) {
-//			    promocion.setIncluye(strArray[i]);
-//				pos ++;
-//			}
-//			
-//			if(promocion.getBeneficio() == 0 && pos == i) {
-//			    promocion.setBeneficio(Integer.parseInt(strArray[i].toString()));
-//				pos ++;
-//			}
-//			
-//			if(promocion.getValor() == 0 && pos == i) {
-//			    promocion.setValor(Integer.parseInt(strArray[i].toString()));
-//				pos ++;
-//			}
-//			
-//			if(promocion.getGratis() == null && pos == i) {
-//			    promocion.setGratis(strArray[i]);
-//				pos ++;
-//			}
-//			
-//		}
-//	}
-
-	public void parseStringUsuario(String linea, Usuario usuario) {
-		String[] strArray = null;
-		strArray = linea.split("	");
-
-		generaObjectUsuario(usuario, strArray);
+	private void parsearUsuario(Scanner scanner) {
+		System.out.println("USUARIO");
 	}
 
-	public void parseStringAtraccion(String linea, Atraccion atraccion) {
-		String[] strArray = null;
-		strArray = linea.split("	");
+	private List<Atraccion> parsearAtraccion(Scanner scanner) {
+		
+		List<Atraccion> atracciones = new ArrayList<Atraccion>();
+		
+		while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] values = line.split("\t");
 
-		generaObjectAtraccion(atraccion, strArray);
+            String nombreAtraccion = values[0];
+            int precioFinal = Integer.parseInt(values[1]);
+            double duracion = Double.parseDouble(values[2]);
+            int cupos = Integer.parseInt(values[3]);
+            String tipo = values[4];
+            
+            try {
+            	Atraccion atraccion = new Atraccion(nombreAtraccion, precioFinal, 
+            										duracion, cupos, tipo);
+            	
+            	atracciones.add(atraccion);
+            	
+            } catch (AtraccionExcepcion e) {
+            	System.out.println("Error");
+            }
+            
+        }
+		
+		return atracciones;
 	}
 
-//	public void parseStringPromocion(String linea, Promocion promocion) {
-//		String[] strArray = null;
-//		strArray = linea.split("	");
-//
-//		generaObjectPromocion(strArray, promocion);
-//	}
-
-//	public void leerArchivoYListarUsuario(ArrayList<Usuario> usuarios) {
-//
-//		try {
-//			File fileUsuarios = new File(
-//					"C:\\\\Users\\\\Administrator\\\\Desktop\\\\Facu 2023\\\\Paradigmas de programacion\\\\Desarrollos\\\\TP\\\\src\\\\archivos de entrada\\\\"
-//							+ this.nombre + ".in");
-//			Scanner scvisita = new Scanner(fileUsuarios);
-//
-//			while (scvisita.hasNextLine()) {
-//
-//				String linea = scvisita.nextLine();		
-//				
-////				StringTokenizer atributo = new StringTokenizer(linea, "\t");
-//
-//				Usuario Usuario = new Usuario();
-//				parseStringUsuario(linea, Usuario);
-//	
-////				while (atributo.hasMoreElements()) {
-////					Usuario.setNombre(atributo.nextElement().toString());
-////					Usuario.setTipo(atributo.nextElement().toString());
-////					Usuario.setSaldo(Double.parseDouble(atributo.nextElement().toString()));
-////					Usuario.setTiempo(Integer.parseInt(atributo.nextElement().toString()));
-//
-////				}
-//				usuarios.add(Usuario);
-//			}
-//
-//			scvisita.close();
-//
-////			Usuarios.forEach(c -> System.out.println(c));
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-////		return Usuarios; 
-//	}
-
-//	public void leerArchivoYListarAtraccion(ArrayList<Atraccion> atracciones) {
-//
-//		try {
-//			File fileatracciones = new File(
-//					"C:\\\\Users\\\\Administrator\\\\Desktop\\\\Facu 2023\\\\Paradigmas de programacion\\\\Desarrollos\\\\TP\\\\src\\\\archivos de entrada\\\\"
-//							+ this.nombre + ".in");
-//			Scanner scatraccion = new Scanner(fileatracciones);
-//
-//			while (scatraccion.hasNextLine()) {
-//
-//				String linea = scatraccion.nextLine();
-////				StringTokenizer atributo = new StringTokenizer(linea, "\t");
-//
-////				Usuario Usuario = new Usuario();
-//				Atraccion atraccion = new Atraccion();
-//				parseStringAtraccion(linea, atraccion);
-//
-////				while (atributo.hasMoreElements()) {
-////
-////					atraccion.setNombre(atributo.nextElement().toString());
-////					atraccion.setCosto(Integer.parseInt(atributo.nextElement().toString()));
-////					atraccion.setTiempo(Double.parseDouble(atributo.nextElement().toString()));
-////					atraccion.setCupo(Integer.parseInt(atributo.nextElement().toString()));
-////					atraccion.setTipo(atributo.nextElement().toString());
-////				}
-//				atracciones.add(atraccion);
-//			}
-//
-//			scatraccion.close();
-//
-////			Usuarios.forEach(c -> System.out.println(c));
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-////		return Usuarios;
-//	}
-
-//	public void leerArchivoYListarPromocion(ArrayList<Promocion> promociones) {
-//
-//		try {
-//			File filepromociones = new File(
-//					"C:\\\\Users\\\\Administrator\\\\Desktop\\\\Facu 2023\\\\Paradigmas de programacion\\\\Desarrollos\\\\TP\\\\src\\\\archivos de entrada\\\\"
-//							+ this.nombre + ".in");
-//			Scanner scpromocion = new Scanner(filepromociones);
-//
-//			while (scpromocion.hasNextLine()) {
-//
-//				String linea = scpromocion.nextLine();
-//				StringTokenizer atributo = new StringTokenizer(linea, "\t");
-//
-////				Usuario Usuario = new Usuario();
-//				Promocion promocion = new Promocion();
-//				parseStringPromocion(linea, promocion);
-//
-////				while (atributo.hasMoreElements()) {
-////					promocion.setNombre(atributo.nextElement().toString());
-////					promocion.setIncluye(atributo.nextElement().toString());
-////					promocion.setBeneficio(Integer.parseInt(atributo.nextElement().toString()));
-////					promocion.setValor(Integer.parseInt(atributo.nextElement().toString()));
-////					promocion.setGratis(atributo.nextElement().toString());
-////				}
-//
-//				promociones.add(promocion);
-//
-//			}
-//
-//			scpromocion.close();
-//
-////			Usuarios.forEach(c -> System.out.println(c));
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-////		return Usuarios;
-//	}
-
-//	public void guardarArchivo(double[] datos) {
-//		FileWriter file = null;
-//		PrintWriter printerWriter = null;
-//
-//		try {
-//			file = new FileWriter("casos de prueba/out/" + this.nombre + ".out");
-//			printerWriter = new PrintWriter(file);
-//
-//			for (int i = 0; i < datos.length; i++) {
-//				// Imprime los datos y hace un salto de linea
-//				printerWriter.println(datos[i]);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			if (file != null) {
-//				try {
-//					file.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-//	}
-
+	private void parsearPromocion(Scanner scanner) {
+		System.out.println("PROMOCION");
+	}
 }
