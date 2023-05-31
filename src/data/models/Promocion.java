@@ -1,11 +1,10 @@
 package data.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Promocion extends Oferta {
 
-	protected List<Atraccion> atracciones = new ArrayList<Atraccion>();
+	protected List<Atraccion> atracciones;
 	protected int precioSinDescuento;
 
 	public Promocion(String nombre, double duracion, String tipo, List<Atraccion> atracciones) {
@@ -16,6 +15,7 @@ public abstract class Promocion extends Oferta {
 		for (Atraccion atraccion : this.atracciones) {
 			this.precioSinDescuento += atraccion.getPrecio();
 		}
+		aplicarDescuento();
 
 	}
 
@@ -27,6 +27,6 @@ public abstract class Promocion extends Oferta {
 		return atracciones;
 	}
 
-	public abstract void aplicarDescuento();
+	protected abstract void aplicarDescuento();
 
 }

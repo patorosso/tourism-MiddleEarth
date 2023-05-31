@@ -10,7 +10,7 @@ public class AXB extends Promocion {
 
 	}
 
-	public void aplicarDescuento() {
+	protected void aplicarDescuento() {
 		int suma = 0;
 		for (int i = 0; i < atracciones.size() - 1; i++)
 			suma += atracciones.get(i).getPrecio();

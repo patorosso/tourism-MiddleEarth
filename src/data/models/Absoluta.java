@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Absoluta extends Promocion {
 
-	private int montoADescontar = 400;
+	private int montoADescontar;
 
 	public Absoluta(String nombre, double duracion, String tipo, List<Atraccion> atracciones) {
 
@@ -12,11 +12,13 @@ public class Absoluta extends Promocion {
 
 	}
 
-	public void aplicarDescuento() {
+	protected void aplicarDescuento() {
 
 		int suma = 0;
 		for (Atraccion atraccion : atracciones)
 			suma += atraccion.getPrecio();
+		
+		montoADescontar  = 15;
 
 		precioSinDescuento = suma;
 		suma -= montoADescontar;

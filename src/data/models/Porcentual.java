@@ -20,7 +20,7 @@ public class Porcentual extends Promocion {
 		this.porcentaje = porcentaje;
 	}
 
-	public void aplicarDescuento() {
+	protected void aplicarDescuento() {
 
 		int suma = 0;
 		for (Atraccion atraccion : atracciones)
