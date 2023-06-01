@@ -48,14 +48,14 @@ public class Ofertador implements IteratorOferta {
 
 		if (this.indice == this.ofertas.size())
 			return false;
-		if (usuario.getTiempo() < this.ofertas.get(this.indice).getDuracion())
+		if (usuario.getTiempo() <= this.ofertas.get(this.indice).getDuracion())
 			return false;
-		if (usuario.getMonedas() < this.ofertas.get(this.indice).getPrecio())
+		if (usuario.getMonedas() <= this.ofertas.get(this.indice).getPrecio())
 			return false;
-		if (!ManejadorDeCupos.tengoCupoPara(this.ofertas.get(this.indice)))
+		if (!this.ofertas.get(indice).hayCupo())
 			return false;
-		if (this.usuario.getOfertasCompradas() != null
-				&& this.usuario.getOfertasCompradas().contains(this.ofertas.get(this.indice)))
+		if (this.usuario.getOfertasCompradas() != null && 
+			this.usuario.getOfertasCompradas().contains(this.ofertas.get(this.indice)))
 			return false;
 
 		return true;
