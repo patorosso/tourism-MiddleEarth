@@ -6,7 +6,7 @@ public abstract class Oferta implements Comparable<Oferta> {
 	
 	protected String nombre;
 	protected int precioSinDescuento;
-	protected float duracion;
+	protected double duracion;
 	protected String tipo;
 	
 	public abstract List<Oferta> comprar();
@@ -28,7 +28,7 @@ public abstract class Oferta implements Comparable<Oferta> {
 	public abstract String getNombre();
 	public abstract int getPrecioSinDescuento();
 	public abstract int getPrecioConDescuento();
-	public abstract float getDuracion();
+	public abstract double getDuracion();
 	public abstract String getTipo();
 	
 }

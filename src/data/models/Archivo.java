@@ -3,75 +3,164 @@ package data.models;
 import java.util.*;
 
 import data.models.excepcion.AtraccionExcepcion;
+import data.models.excepcion.UsuarioExcepcion;
 
 import java.io.*;
 
 public class Archivo {
 
-	private String nombre;
+	public Archivo() {
 
-	public Archivo(String nombre) {
-		this.nombre = nombre;
 	}
 
-	public void leerArchivo() {
+	public List<Usuario> leerArchivoUsuarios() {
+		List<Usuario> usuarios = new ArrayList<>();
 		Scanner scanner = null;
 
 		try {
-
-			File file = new File("resources/in/" + this.nombre + ".in");
+			File file = new File("resources/in/Usuarios.in");
 			scanner = new Scanner(file);
 
-			if (this.nombre.equals("Usuarios")) {
-				this.parsearUsuario(scanner);
-			} else if (this.nombre.equals("Atracciones")) {
-				this.parsearAtraccion(scanner);
-			} else if (this.nombre.equals("Promociones")) {
-				this.parsearPromocion(scanner);
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				Usuario usuario = this.parsearUsuario(linea);
+				usuarios.add(usuario);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		} finally {
-			scanner.close();
+			if (scanner != null) {
+				scanner.close();
+			}
 		}
+
+		return usuarios;
 	}
 
-	private void parsearUsuario(Scanner scanner) {
-		System.out.println("USUARIO");
-	}
+	public List<Atraccion> leerArchivoAtracciones() {
+		List<Atraccion> atracciones = new ArrayList<>();
+		Scanner scanner = null;
 
-	private List<Atraccion> parsearAtraccion(Scanner scanner) {
-		
-		List<Atraccion> atracciones = new ArrayList<Atraccion>();
-		
-		while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            String[] values = line.split("\t");
+		try {
+			File file = new File("resources/in/Atracciones.in");
+			scanner = new Scanner(file);
 
-            String nombreAtraccion = values[0];
-            int precioFinal = Integer.parseInt(values[1]);
-            double duracion = Double.parseDouble(values[2]);
-            int cupos = Integer.parseInt(values[3]);
-            String tipo = values[4];
-            
-            try {
-            	Atraccion atraccion = new Atraccion(nombreAtraccion, precioFinal, 
-            										duracion, cupos, tipo);
-            	
-            	atracciones.add(atraccion);
-            	
-            } catch (AtraccionExcepcion e) {
-            	System.out.println("Error");
-            }
-            
-        }
-		
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				Atraccion atraccion = this.parsearAtraccion(linea);
+				atracciones.add(atraccion);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (scanner != null) {
+				scanner.close();
+			}
+		}
+
 		return atracciones;
 	}
 
-	private void parsearPromocion(Scanner scanner) {
-		System.out.println("PROMOCION");
+	public List<Promocion> leerArchivoPromociones() {
+		List<Promocion> promociones = new ArrayList<>();
+		Scanner scanner = null;
+
+		try {
+			File file = new File("resources/in/Promociones.in");
+			scanner = new Scanner(file);
+
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				Promocion promocion = this.parsearPromocion(linea);
+				promociones.add(promocion);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (scanner != null) {
+				scanner.close();
+			}
+		}
+
+		return promociones;
 	}
+
+	private Usuario parsearUsuario(String linea) {
+
+		String[] atributos = linea.split("\t");
+
+		String nombre = atributos[0];
+		String preferencia = atributos[1];
+		int monedas = Integer.parseInt(atributos[2]);
+		double tiempo = Double.parseDouble(atributos[3]);
+
+		Usuario usuario = null;
+		try {
+			usuario = new Usuario(nombre, monedas, tiempo, preferencia);
+		} catch (UsuarioExcepcion e) {
+			e.printStackTrace();
+		}
+		return usuario;
+
+	}
+
+	private Atraccion parsearAtraccion(String linea) {
+
+		String[] atributos = linea.split("\t");
+
+		String nombre = atributos[0];
+		int precio = Integer.parseInt(atributos[1]);
+		double duracion = Double.parseDouble(atributos[2]);
+		int cupos = Integer.parseInt(atributos[3]);
+		String tipo = atributos[4];
+
+		Atraccion atraccion = null;
+		try {
+			atraccion = new Atraccion(nombre, precio, duracion, tipo, cupos);
+		} catch (AtraccionExcepcion e) {
+			e.printStackTrace();
+		}
+		return atraccion;
+
+	}
+
+	private Promocion parsearPromocion(String linea) {
+
+		String[] atributos = linea.split("!");
+
+		String tipoPromocion = atributos[0];
+
+		List<Oferta> ofertas = new ArrayList<Oferta>();
+
+		int indice = 1;
+		while (!atributos[indice].equals("|")) {
+			Atraccion atraccion = this.parsearAtraccion(atributos[indice]);
+			ofertas.add(atraccion);
+			indice++;
+		}
+		
+		indice ++;
+
+	Promocion promocion = null;
+
+	switch(tipoPromocion)
+	{
+		case "%":
+			double porcentaje = Double.parseDouble(atributos[indice]);
+			promocion = new PromocionPorcentual(ofertas, porcentaje);
+			break;
+		case "$":
+			int monto = Integer.parseInt(atributos[indice]);
+			promocion = new PromocionAbsoluta(ofertas, monto);
+			break;
+		case "&":
+			promocion = new PromocionAxB(ofertas);
+			break;
+
+		}
+
+	return promocion;
+
+}
+
 }

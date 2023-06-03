@@ -23,6 +23,7 @@ public class Sistema {
 
 		try {
 
+			//ABRIR UN ARCHIVO DE RESUMEN
 			for (Usuario usuario : usuarios) {
 
 				System.out.println("Nombre visitante: " + usuario.getNombre() + "\n");
@@ -48,11 +49,14 @@ public class Sistema {
 						if(!oferta.restarCupo())
 							ofertador.eliminarOferta();
 						System.out.println("Aceptada!");
+						
 					}
 
 					System.out.println("----------------------------\n");
 
 				}
+				
+				this.mostrarItinerario(usuario);
 
 			}
 			
@@ -63,6 +67,33 @@ public class Sistema {
 		} catch (UsuarioExcepcion e) {
 			System.out.println("[Error capturado usuario]" + e.getMessage());
 		}
+		
 	}
+	
+	private void mostrarItinerario(Usuario usuario) {
+		
+		System.out.println("ITINERARIO");
+		System.out.println("----------\n");
+		
+		String nombre = "";
+		int precio = 0;
+		double duracion = 0;
+		
+		for(Oferta oferta : usuario.getOfertasCompradas()) {
+			
+			nombre += oferta.getNombre() + " ";
+			precio += oferta.getPrecioConDescuento();
+			duracion += oferta.getDuracion();
+			
+		}
+		
+		System.out.println("Ofertas compradas: " + nombre);
+		System.out.println("Precio total: " + precio);
+		System.out.println("Duracion total: " + duracion);
+		
+		System.out.println("--------------------\n");
+		
+	}
+	
 
 }

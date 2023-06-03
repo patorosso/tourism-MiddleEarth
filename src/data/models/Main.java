@@ -5,18 +5,19 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) {
-//		
-//		List<Oferta> ofertas = new ArrayList<Oferta>();
-//		
-//		Archivo a1 = new Archivo("Usuarios");
-//		Archivo a2 = new Archivo("Atracciones");
-//		Archivo a3 = new Archivo("Promociones");
-//		
-//		//a1.leerArchivo();
-//		a2.leerArchivo();
-//		//a3.leerArchivo();
-
-		System.out.println("Miguel Gonzalo Ledesma");
+		
+		Archivo archivo = new Archivo();
+		
+		List<Oferta> ofertas = new ArrayList<Oferta>();
+		List<Usuario> usuarios = archivo.leerArchivoUsuarios();
+		List<Atraccion> atracciones = archivo.leerArchivoAtracciones();
+		List<Promocion> promociones = archivo.leerArchivoPromociones();
+		
+		ofertas.addAll(atracciones);
+		ofertas.addAll(promociones);
+		
+		Sistema sistema = new Sistema(usuarios, ofertas);
+		sistema.ofertarActividades();
 	}
 
 }

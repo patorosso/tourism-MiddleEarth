@@ -25,7 +25,8 @@ public abstract class Promocion extends Oferta {
 		this.nombre = this.nombre.substring(0, this.nombre.length() - 2);
 	}
 
-	@Override
+	@Override 
+	// SACAR ESTO DE ACA 
 	public List<Oferta> comprar() {
 		return this.ofertas;
 	}
@@ -102,7 +103,7 @@ public abstract class Promocion extends Oferta {
 	}
 
 	@Override
-	public float getDuracion() {
+	public double getDuracion() {
 		return this.duracion;
 	}
 

@@ -2,14 +2,18 @@ package data.models;
 
 import java.util.*;
 
+import data.models.excepcion.AtraccionExcepcion;
+
 public class Atraccion extends Oferta {
 	
 	private int cupos;
 	
-	public Atraccion(String nombre, int precio, float duracion, String tipo, int cupos) {
+	public Atraccion(String nombre, int precio, double duracion, String tipo, int cupos) throws AtraccionExcepcion {
 		
 		this.nombre = nombre;
 		this.precioSinDescuento = precio;
+		if(duracion < 0)
+			throw new AtraccionExcepcion("Error");
 		this.duracion = duracion;
 		this.tipo = tipo;
 		this.cupos = cupos;
@@ -89,7 +93,7 @@ public class Atraccion extends Oferta {
 		return this.precioSinDescuento;
 	}
 	@Override
-	public float getDuracion() {
+	public double getDuracion() {
 		return this.duracion;
 	}
 	@Override
