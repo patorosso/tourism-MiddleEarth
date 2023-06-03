@@ -1,7 +1,5 @@
 package data.models;
 
-import java.util.*;
-
 import data.models.excepcion.AtraccionExcepcion;
 
 public class Atraccion extends Oferta {
@@ -38,9 +36,9 @@ public class Atraccion extends Oferta {
 	@Override
 	public boolean equals(Object obj) {
 		Oferta other = (Oferta) obj;
-		if (Objects.equals(this.nombre, other.nombre))
+		if (this.nombre.equals(other.nombre))
 			return true;
-
+		
 		return false;
 	}
 

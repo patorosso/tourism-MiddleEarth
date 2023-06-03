@@ -55,8 +55,7 @@ public class Ofertador implements IteratorOferta {
 			if(this.ofertas.get(indice).hayCupo() &&
 			   this.usuario.getTiempo() >= this.ofertas.get(this.indice).getDuracion() &&
 			   this.usuario.getMonedas() >= this.ofertas.get(this.indice).getPrecioConDescuento() &&
-			   (this.usuario.getOfertasCompradas() == null || 
-			   !this.usuario.getOfertasCompradas().contains(this.ofertas.get(this.indice))))
+			   !this.yaComproEstaOferta(this.ofertas.get(this.indice)))
 				return true;
 			
 			this.indice ++;
@@ -74,6 +73,22 @@ public class Ofertador implements IteratorOferta {
 		Oferta oferta = this.ofertas.get(this.indice);
 		this.indice++;
 		return oferta;
+	}
+	
+	private boolean yaComproEstaOferta(Oferta oferta) {
+		
+		List<Oferta> compras = usuario.getOfertasCompradas();
+		
+		if(compras == null)
+			return false;
+		
+		for(Oferta compra : compras) {
+			if(compra.equals(oferta))
+				return true;
+			
+		}
+		
+		return false;
 	}
 
 }

@@ -30,10 +30,10 @@ public abstract class Promocion extends Oferta {
 	public boolean equals(Object obj) {
 		Oferta other = (Oferta) obj;
 		for (int i = 0; i < this.ofertas.size(); i++) {
-			if (Objects.equals(this.ofertas.get(i).nombre, other.nombre))
+			if (this.ofertas.get(i).nombre.equals(other.nombre))
 				return true;
 		}
-
+		
 		return false;
 	}
 
