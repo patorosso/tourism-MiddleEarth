@@ -36,7 +36,7 @@ public class Atraccion extends Oferta {
 	@Override
 	public boolean equals(Object obj) {
 		Oferta other = (Oferta) obj;
-	
+
 		return this.nombre.equals(other.nombre);
 	}
 
@@ -90,8 +90,5 @@ public class Atraccion extends Oferta {
 		return this.tipo;
 	}
 
-	public int getCupos() {
-		return this.cupos;
-	}
 
 }

@@ -79,7 +79,7 @@ public class Ofertador implements IteratorOferta {
 		
 		List<Oferta> compras = usuario.getOfertasCompradas();
 		
-		if(compras == null)
+		if(compras.isEmpty())
 			return false;
 		
 		for(Oferta compra : compras) {
