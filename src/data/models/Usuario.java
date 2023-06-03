@@ -47,6 +47,12 @@ public class Usuario {
 		this.tiempo -= cant;
 	}
 
+	@Override
+	public String toString() {
+		return "Usuario: \n" + "Nombre: " + this.nombre + "\n" + "Monedas: " + this.monedas + "\n" + "Tiempo: "
+				+ this.tiempo + "\n" + "Preferencia: " + this.preferencia + "\n";
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -83,8 +89,8 @@ public class Usuario {
 		return ofertasCompradas;
 	}
 
-	public void agregarCompra(List<Oferta> ofertas) {
-		this.ofertasCompradas.addAll(ofertas);
+	public void comprar(Oferta oferta) {
+		this.ofertasCompradas.add(oferta);
 	}
 
 }

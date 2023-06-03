@@ -25,12 +25,7 @@ public abstract class Promocion extends Oferta {
 		this.nombre = this.nombre.substring(0, this.nombre.length() - 2);
 	}
 
-	@Override 
-	// SACAR ESTO DE ACA 
-	public List<Oferta> comprar() {
-		return this.ofertas;
-	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		Oferta other = (Oferta) obj;

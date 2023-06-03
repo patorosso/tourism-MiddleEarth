@@ -138,13 +138,12 @@ public class Archivo {
 			ofertas.add(atraccion);
 			indice++;
 		}
-		
-		indice ++;
 
-	Promocion promocion = null;
+		indice++;
 
-	switch(tipoPromocion)
-	{
+		Promocion promocion = null;
+
+		switch (tipoPromocion) {
 		case "%":
 			double porcentaje = Double.parseDouble(atributos[indice]);
 			promocion = new PromocionPorcentual(ofertas, porcentaje);
@@ -159,8 +158,50 @@ public class Archivo {
 
 		}
 
-	return promocion;
+		return promocion;
 
-}
+	}
 
+	public void guardarItinerario(Usuario usuario) {
+
+		FileWriter archivo = null;
+		PrintWriter printerWriter = null;
+
+		try {
+			archivo = new FileWriter("resources/out/" + usuario.getNombre() + ".out");
+			printerWriter = new PrintWriter(archivo);
+
+			printerWriter.println(usuario);
+
+			String nombre = "";
+			int precio = 0;
+			double duracion = 0;
+
+			for (Oferta oferta : usuario.getOfertasCompradas()) {
+
+				nombre += oferta + "\n";
+				precio += oferta.getPrecioConDescuento();
+				duracion += oferta.getDuracion();
+
+			}
+
+			printerWriter.println("Ofertas compradas: \n" + nombre);
+			printerWriter.println("--------------------\n");
+			printerWriter.println("TOTAL:\n");
+			printerWriter.println("Precio total: " + precio);
+			printerWriter.println("Duracion total: " + duracion);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (archivo != null) {
+				try {
+					archivo.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
 }
