@@ -29,12 +29,8 @@ public abstract class Promocion extends Oferta {
 	@Override
 	public boolean equals(Object obj) {
 		Oferta other = (Oferta) obj;
-		for (int i = 0; i < this.ofertas.size(); i++) {
-			if (this.ofertas.get(i).nombre.equals(other.nombre))
-				return true;
-		}
-		
-		return false;
+
+		return this.ofertas.contains(other);
 	}
 
 	@Override

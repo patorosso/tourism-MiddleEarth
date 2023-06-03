@@ -36,10 +36,8 @@ public class Atraccion extends Oferta {
 	@Override
 	public boolean equals(Object obj) {
 		Oferta other = (Oferta) obj;
-		if (this.nombre.equals(other.nombre))
-			return true;
-		
-		return false;
+	
+		return this.nombre.equals(other.nombre);
 	}
 
 	@Override

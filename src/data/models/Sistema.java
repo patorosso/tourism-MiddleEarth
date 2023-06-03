@@ -36,13 +36,13 @@ public class Sistema {
 
 					// Bloque try arroja una exception
 					Scanner scanner = new Scanner(System.in);
-					char opcion;
+					String opcion;
 					do {
 						System.out.println("Acepta sugerencia? Ingrese S o N");
-						opcion = scanner.next().toUpperCase().charAt(0);
-					} while (opcion != 'S' && opcion != 'N');
+						opcion = scanner.nextLine().toUpperCase();
+					} while (!opcion.equals("S") && !opcion.equals("N"));
 
-					if (opcion == 'S') {
+					if (opcion.equals("S")) {
 						usuario.comprar(oferta);
 						usuario.consumirTiempo(oferta.getDuracion());
 						usuario.consumirMonedas(oferta.getPrecioConDescuento());
@@ -52,7 +52,7 @@ public class Sistema {
 
 					}
 
-					System.out.println("----------------------------\n\n\n");
+					System.out.println("----------------------------\n");
 
 				}
 

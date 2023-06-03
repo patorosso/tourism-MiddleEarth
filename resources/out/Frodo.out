@@ -1,7 +1,7 @@
 Usuario: 
 Nombre: Frodo
-Monedas: 49917
-Tiempo: 76.0
+Monedas: 49930
+Tiempo: 84.5
 Preferencia: Aventura
 
 Ofertas compradas: 
@@ -10,11 +10,6 @@ Promocion
 -Duracion: 7.0
 -Precio original: 28
 -Precio con descuento: 23
-
-Atraccion
-Nombre: [Moria]
--Precio: 10
--Duracion: 2.0
 
 Promocion
 -Atracciones incluidas: [Minas Tirith, Abismo de Helm, Erebor]
@@ -27,15 +22,10 @@ Nombre: [Lothlórien]
 -Precio: 35
 -Duracion: 1.0
 
-Atraccion
-Nombre: [La Comarca]
--Precio: 3
--Duracion: 6.5
-
 
 --------------------
 
 TOTAL:
 
-Precio total: 83
-Duracion total: 24.0
+Precio total: 70
+Duracion total: 15.5
