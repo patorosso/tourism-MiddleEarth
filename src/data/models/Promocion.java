@@ -2,81 +2,89 @@ package data.models;
 
 import java.util.*;
 
-public abstract class Promocion implements Oferta {
-	
-	protected List<Oferta> ofertas = new ArrayList<Oferta>();
-	protected String nombre;
-	protected int precioSinDescuento;
+public abstract class Promocion extends Oferta {
+
+	protected List<Oferta> ofertas;
 	protected int precioConDescuento;
-	protected float duracion;
-	protected String tipo;
 	protected int precioUltimaAtraccion;
-	
+
 	public Promocion(List<Oferta> ofertas) {
-		
+
 		this.ofertas = ofertas;
 		this.nombre = "";
-		this.precioSinDescuento = 0;
-		this.precioConDescuento = 0;
-		this.duracion = 0;
-		this.tipo = "";
-		this.precioUltimaAtraccion = 0;
-		
-		for(Oferta oferta : this.ofertas) {
-			this.nombre += oferta.getNombre() + ",";
+
+		// Tal vez no sea la mejor manera
+		for (Oferta oferta : this.ofertas) {
+			this.nombre += oferta.getNombre() + ", ";
 			this.precioSinDescuento += oferta.getPrecioSinDescuento();
 			this.duracion += oferta.getDuracion();
 			this.tipo = oferta.getTipo();
 			this.precioUltimaAtraccion = oferta.getPrecioSinDescuento();
 		}
-		
-		this.nombre = this.nombre.substring(0, this.nombre.length()-1);
+
+		this.nombre = this.nombre.substring(0, this.nombre.length() - 2);
 	}
-	
+
+	@Override
+	public List<Oferta> comprar() {
+		return this.ofertas;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Oferta other = (Oferta) obj;
+		for (int i = 0; i < this.ofertas.size(); i++) {
+			if (Objects.equals(this.ofertas.get(i).nombre, other.nombre))
+				return true;
+		}
+
+		return false;
+	}
+
 	@Override
 	public int compareTo(Oferta otraOferta) {
-		
-		if(!otraOferta.esPromocion())
+
+		if (!otraOferta.esPromocion())
 			return -1;
-		
-		if(this.duracion + this.precioConDescuento > 
-		   otraOferta.getDuracion() + otraOferta.getPrecioConDescuento())
+
+		if (this.duracion + this.precioConDescuento > otraOferta.getDuracion() + otraOferta.getPrecioConDescuento())
 			return -1;
-		
-		if(this.duracion + this.precioConDescuento <
-		   otraOferta.getDuracion() + otraOferta.getPrecioConDescuento())
+
+		if (this.duracion + this.precioConDescuento < otraOferta.getDuracion() + otraOferta.getPrecioConDescuento())
 			return 1;
-		
+
 		return 0;
 	}
-	
+
 	@Override
 	public boolean esPromocion() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean hayCupo() {
-		for(Oferta oferta : ofertas)
-			if(!oferta.hayCupo())
+		for (Oferta oferta : ofertas)
+			if (!oferta.hayCupo())
 				return false;
-		
+
 		return true;
 	}
 
 	@Override
-	public void restarCupo() {
-		for(Oferta oferta : ofertas)
-			oferta.restarCupo();
+	public boolean restarCupo() {
+		for (Oferta oferta : ofertas) {
+			if (!oferta.restarCupo())
+				return false;
+		}
+
+		return true;
 	}
-	
+
 	@Override
- 	public String toString() {
-		return "Promocion\n" + 
-			   "-Atracciones incluidas: [" + this.nombre + "]\n" + 
-			   "-Duracion: " + this.duracion + "\n" +
-			   "-Precio original: " + this.precioSinDescuento + "\n" + 
-			   "-Precio con descuento: " + this.precioConDescuento + "\n";
+	public String toString() {
+		return "Promocion\n" + "-Atracciones incluidas: [" + this.nombre + "]\n" + "-Duracion: " + this.duracion + "\n"
+				+ "-Precio original: " + this.precioSinDescuento + "\n" + "-Precio con descuento: "
+				+ this.precioConDescuento + "\n";
 	}
 
 	@Override
@@ -103,8 +111,8 @@ public abstract class Promocion implements Oferta {
 		return this.tipo;
 	}
 
-	public List<Oferta> getOfertas(){
+	public List<Oferta> getOfertas() {
 		return this.ofertas;
 	}
-	
+
 }

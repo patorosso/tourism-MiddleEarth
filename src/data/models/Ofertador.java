@@ -23,6 +23,11 @@ public class Ofertador implements IteratorOferta {
 
 		ordenarLista(this.ofertas);
 	}
+	
+	public void eliminarOferta() {
+		this.indice --;
+		this.ofertas.remove(this.indice);
+	}
 
 	private void ordenarLista(List<Oferta> ofertas) {
 
@@ -45,20 +50,19 @@ public class Ofertador implements IteratorOferta {
 
 	@Override
 	public boolean tieneSiguienteOferta() {
-
-		if (this.indice == this.ofertas.size())
-			return false;
-		if (usuario.getTiempo() <= this.ofertas.get(this.indice).getDuracion())
-			return false;
-		if (usuario.getMonedas() <= this.ofertas.get(this.indice).getPrecio())
-			return false;
-		if (!this.ofertas.get(indice).hayCupo())
-			return false;
-		if (this.usuario.getOfertasCompradas() != null && 
-			this.usuario.getOfertasCompradas().contains(this.ofertas.get(this.indice)))
-			return false;
-
-		return true;
+		
+		while(this.indice < this.ofertas.size() ) {
+			if(this.ofertas.get(indice).hayCupo() &&
+			   this.usuario.getTiempo() >= this.ofertas.get(this.indice).getDuracion() &&
+			   this.usuario.getMonedas() >= this.ofertas.get(this.indice).getPrecioConDescuento() &&
+			   (this.usuario.getOfertasCompradas() == null || 
+			   !this.usuario.getOfertasCompradas().contains(this.ofertas.get(this.indice))))
+				return true;
+			
+			this.indice ++;
+		}		
+		
+		return false;
 	}
 
 	@Override

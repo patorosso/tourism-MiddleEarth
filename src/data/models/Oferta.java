@@ -1,18 +1,34 @@
 package data.models;
 
-public interface Oferta extends Comparable<Oferta> {
+import java.util.*;
+
+public abstract class Oferta implements Comparable<Oferta> {
 	
-	int compareTo(Oferta otraOferta);
-	boolean esPromocion();
+	protected String nombre;
+	protected int precioSinDescuento;
+	protected float duracion;
+	protected String tipo;
 	
-	boolean hayCupo();
-	void restarCupo();
+	public abstract List<Oferta> comprar();
 	
-	String toString();
+	@Override
+	public int hashCode() {
+		return Objects.hash(nombre);
+	}
+	public abstract boolean equals(Object obj);
 	
-	String getNombre();
-	int getPrecioSinDescuento();
-	int getPrecioConDescuento();
-	float getDuracion();
-	String getTipo();
+	public abstract int compareTo(Oferta otraOferta);
+	protected abstract boolean esPromocion();
+	
+	public abstract boolean hayCupo();
+	public abstract boolean restarCupo();
+	
+	public abstract String toString();
+	
+	public abstract String getNombre();
+	public abstract int getPrecioSinDescuento();
+	public abstract int getPrecioConDescuento();
+	public abstract float getDuracion();
+	public abstract String getTipo();
+	
 }

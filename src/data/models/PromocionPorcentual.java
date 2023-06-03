@@ -10,6 +10,8 @@ public class PromocionPorcentual extends Promocion {
 		
 		super(ofertas);
 		this.porcentaje = porcentaje;
+		
+		//Tal vez debería haber un método para aplicar el descuento
 		this.precioConDescuento = this.precioSinDescuento - (int)(this.precioSinDescuento * this.porcentaje);
 	}
 	

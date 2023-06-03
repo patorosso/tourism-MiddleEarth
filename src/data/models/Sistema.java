@@ -42,10 +42,11 @@ public class Sistema {
 					} while (opcion != 'S' && opcion != 'N');
 
 					if (opcion == 'S') {
-						usuario.agregarCompra(oferta);
+						usuario.agregarCompra(oferta.comprar());
 						usuario.consumirTiempo(oferta.getDuracion());
-						usuario.consumirMonedas(oferta.getPrecio());
-						oferta.restarCupo();
+						usuario.consumirMonedas(oferta.getPrecioConDescuento());
+						if(!oferta.restarCupo())
+							ofertador.eliminarOferta();
 						System.out.println("Aceptada!");
 					}
 
@@ -54,6 +55,8 @@ public class Sistema {
 				}
 
 			}
+			
+			System.out.println("FIN PROGRAMA");
 
 		} catch (OfertadorExcepcion e) {
 			System.err.println("[Error capturado ofertador] " + e.getMessage());

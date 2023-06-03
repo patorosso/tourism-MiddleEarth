@@ -83,8 +83,8 @@ public class Usuario {
 		return ofertasCompradas;
 	}
 
-	public void agregarCompra(Oferta oferta) {
-		ofertasCompradas.add(oferta);
+	public void agregarCompra(List<Oferta> ofertas) {
+		this.ofertasCompradas.addAll(ofertas);
 	}
 
 }
