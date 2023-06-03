@@ -1,45 +1,101 @@
 package data.models;
 
 import java.util.*;
-import data.models.excepcion.*;
+
+import data.models.excepcion.AtraccionExcepcion;
 
 public class Atraccion extends Oferta {
 
 	private int cupos;
 
-	// pasar a ofertas
-	private static final List<String> LISTA_TIPOS = new ArrayList<String>(
-			Arrays.asList("Aventura", "Degustacion", "Paisaje"));
+	public Atraccion(String nombre, int precio, double duracion, String tipo, int cupos) throws AtraccionExcepcion {
 
-	public Atraccion(String nombre, int precioFinal, float duracion, int cupos, String tipo) throws AtraccionExcepcion {
-
-		super(nombre, duracion, tipo);
-
-		if (cupos < 0)
-			throw new AtraccionExcepcion("Cupos negativo");
-
-		if (!LISTA_TIPOS.contains(tipo)) {
-			throw new AtraccionExcepcion("La atraccion no es valida.");
-		}
-
+		this.nombre = nombre;
+		this.precioSinDescuento = precio;
+		if (duracion < 0)
+			throw new AtraccionExcepcion("Error");
+		this.duracion = duracion;
+		this.tipo = tipo;
 		this.cupos = cupos;
-		this.precioFinal = precioFinal;
+	}
 
+	@Override
+	public int compareTo(Oferta otraOferta) {
+
+		if (otraOferta.esPromocion())
+			return 1;
+
+		// Tal vez no hagan falta 2 if y pueda resolverse con un return
+		if (this.duracion + this.precioSinDescuento > otraOferta.getDuracion() + otraOferta.getPrecioSinDescuento())
+			return -1;
+
+		if (this.duracion + this.precioSinDescuento < otraOferta.getDuracion() + otraOferta.getPrecioSinDescuento())
+			return 1;
+
+		return 0;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Oferta other = (Oferta) obj;
+		if (Objects.equals(this.nombre, other.nombre))
+			return true;
+
+		return false;
+	}
+
+	@Override
+	public boolean esPromocion() {
+		return false;
+	}
+
+	@Override
+	public boolean hayCupo() {
+		return this.cupos > 0;
+	}
+
+	@Override
+	public boolean restarCupo() {
+		if (this.cupos > 0)
+			this.cupos--;
+
+		return this.cupos != 0;
+	}
+
+	@Override
+	public String toString() {
+		return "Atraccion\n" + "Nombre: [" + this.nombre + "]\n" + "-Precio: " + this.precioSinDescuento + "\n"
+				+ "-Duracion: " + this.duracion + "\n";
+	}
+
+	@Override
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	@Override
+	public int getPrecioSinDescuento() {
+		return this.precioSinDescuento;
+	}
+
+	// Tal vez no sea necesario
+	@Override
+	public int getPrecioConDescuento() {
+		return this.precioSinDescuento;
+	}
+
+	@Override
+	public double getDuracion() {
+		return this.duracion;
+	}
+
+	@Override
+	public String getTipo() {
+		return this.tipo;
 	}
 
 	public int getCupos() {
-		return cupos;
-	}
-
-	public void setCupos(int cupos) {
-		this.cupos = cupos;
-	}
-
-	public void setTipo(String tipo) throws AtraccionExcepcion {
-		if (!LISTA_TIPOS.contains(tipo))
-			throw new AtraccionExcepcion("La atraccion no es valida.");
-
-		this.tipo = tipo;
+		return this.cupos;
 	}
 
 }

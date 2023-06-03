@@ -1,77 +1,39 @@
 package data.models;
 
+import java.util.*;
+
 public abstract class Oferta implements Comparable<Oferta> {
 
 	protected String nombre;
-	protected int precioFinal;
+	protected int precioSinDescuento;
 	protected double duracion;
 	protected String tipo;
 
-	public Oferta(String nombre, double duracion, String tipo) {
-
-		this.nombre = nombre;
-		this.duracion = duracion;
-		this.tipo = tipo;
-	}
-
 	@Override
-	public int compareTo(Oferta oferta) {
-
-		Object ofertaActual = this.getClass();
-		Object ofertaNueva = oferta.getClass();
-
-		// Las preferencias se priorizan
-
-		// Una promocion se prioriza sobre una atraccion
-		if (ofertaActual == Promocion.class && ofertaNueva == Atraccion.class) {
-			return -1;
-		}
-
-		if (ofertaActual == Atraccion.class && ofertaNueva == Promocion.class) {
-			return 1;
-		}
-
-		// Se prioriza la mayor duracion y costo
-		if (this.duracion + this.precioFinal > oferta.duracion + oferta.precioFinal)
-			return -1;
-		if (this.duracion + this.precioFinal < oferta.duracion + oferta.precioFinal)
-			return 1;
-
-		return 0;
+	public int hashCode() {
+		return Objects.hash(nombre);
 	}
 
-	public boolean esPromocion() {
+	public abstract boolean equals(Object obj);
 
-		return this.getClass().getSuperclass() == Promocion.class;
+	public abstract int compareTo(Oferta otraOferta);
 
-	}
+	protected abstract boolean esPromocion();
 
-	public String getNombre() {
-		return nombre;
-	}
+	public abstract boolean hayCupo();
 
-	public int getPrecio() {
-		return precioFinal;
-	}
+	public abstract boolean restarCupo();
 
-	public double getDuracion() {
-		return duracion;
-	}
+	public abstract String toString();
 
-	public String getTipo() {
-		return tipo;
-	}
+	public abstract String getNombre();
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	public abstract int getPrecioSinDescuento();
 
-	public void setPrecio(int costo) {
-		this.precioFinal = costo;
-	}
+	public abstract int getPrecioConDescuento();
 
-	public void setDuracion(double duracion) {
-		this.duracion = duracion;
-	}
+	public abstract double getDuracion();
+
+	public abstract String getTipo();
 
 }

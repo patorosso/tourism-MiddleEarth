@@ -20,16 +20,20 @@ public class Ofertador implements IteratorOferta {
 		this.usuario = usuario;
 		this.ofertas = ofertas;
 		this.indice = 0;
-		
+
 		ordenarLista(this.ofertas);
-		
 	}
 	
+	public void eliminarOferta() {
+		this.indice --;
+		this.ofertas.remove(this.indice);
+	}
+
 	private void ordenarLista(List<Oferta> ofertas) {
-		
+
 		Collections.sort(ofertas);
 		List<Oferta> ofertasSinPreferencias = new ArrayList<Oferta>();
-		
+
 		Iterator<Oferta> itOferta = ofertas.iterator();
 		while (itOferta.hasNext()) {
 
@@ -40,33 +44,32 @@ public class Ofertador implements IteratorOferta {
 				itOferta.remove();
 			}
 		}
-		
-		this.ofertas.addAll(ofertasSinPreferencias); //Juntamos ambas listas en la lista ofertas original.
+
+		this.ofertas.addAll(ofertasSinPreferencias); // Juntamos ambas listas en la lista ofertas original.
 	}
 
 	@Override
 	public boolean tieneSiguienteOferta() {
-
-		if (this.indice == this.ofertas.size())
-			return false;
-		if (usuario.getTiempo() < this.ofertas.get(this.indice).getDuracion())
-			return false;
-		if (usuario.getMonedas() < this.ofertas.get(this.indice).getPrecio())
-			return false;
-		if (!ManejadorDeCupos.tengoCupoPara(this.ofertas.get(this.indice)))
-			return false;
-		if (this.usuario.getOfertasCompradas() != null
-				&& this.usuario.getOfertasCompradas().contains(this.ofertas.get(this.indice)))
-			return false;
-
-		return true;
+		
+		while(this.indice < this.ofertas.size() ) {
+			if(this.ofertas.get(indice).hayCupo() &&
+			   this.usuario.getTiempo() >= this.ofertas.get(this.indice).getDuracion() &&
+			   this.usuario.getMonedas() >= this.ofertas.get(this.indice).getPrecioConDescuento() &&
+			   (this.usuario.getOfertasCompradas() == null || 
+			   !this.usuario.getOfertasCompradas().contains(this.ofertas.get(this.indice))))
+				return true;
+			
+			this.indice ++;
+		}		
+		
+		return false;
 	}
 
 	@Override
 	public Oferta siguienteOferta() {
 
 		if (!this.tieneSiguienteOferta())
-			return null; 
+			return null;
 
 		Oferta oferta = this.ofertas.get(this.indice);
 		this.indice++;

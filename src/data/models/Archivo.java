@@ -1,279 +1,207 @@
 package data.models;
 
-import data.models.excepcion.AtraccionExcepcion;
-
-import java.io.*;
 import java.util.*;
 
+import data.models.excepcion.AtraccionExcepcion;
+import data.models.excepcion.UsuarioExcepcion;
+
+import java.io.*;
 
 public class Archivo {
-	private String nombre; // esto es necesario?
 
-	public Archivo(String nombre) {
-		this.nombre = nombre;
+	public Archivo() {
+
 	}
 
-	public void generaObjectUsuario(Usuario usuario, String[] strArray) {
-
-		int pos = 0;
-		for (int i = 0; i < strArray.length; i++) {
-
-			if (usuario.getNombre() == null && pos == i) {
-				usuario.setNombre(strArray[i]);
-				pos++;
-			}
-
-			if (usuario.getPreferencia() == null && pos == i) {
-				usuario.setPreferencia(strArray[i]);
-				pos++;
-			}
-
-			if (usuario.getMonedas() == 0 && pos == i) {
-				usuario.setMonedas(Integer.parseInt(strArray[i].toString()));
-				pos++;
-			}
-
-			if (usuario.getTiempo() == 0 && pos == i) {
-				usuario.setTiempo(Integer.parseInt(strArray[i].toString()));
-				pos++;
-			}
-
-		}
-	}
-
-	public void generaObjectAtraccion(Atraccion atraccion, String[] strArray) {
-
-		int pos = 0;
+	public List<Usuario> leerArchivoUsuarios() {
+		List<Usuario> usuarios = new ArrayList<>();
+		Scanner scanner = null;
 
 		try {
-			for (int i = 0; i < strArray.length; i++) {
+			File file = new File("resources/in/Usuarios.in");
+			scanner = new Scanner(file);
 
-				if (atraccion.getNombre() == null && pos == i) {
-					atraccion.setNombre(strArray[i]);
-					pos++;
-				}
-
-				if (atraccion.getPrecio() == 0 && pos == i) {
-					atraccion.setPrecio(Integer.parseInt(strArray[i].toString()));
-					pos++;
-				}
-
-				if (atraccion.getDuracion() == 0 && pos == i) {
-					atraccion.setDuracion(Double.parseDouble(strArray[i].toString()));
-					pos++;
-				}
-
-				if (atraccion.getCupos() == 0 && pos == i) {
-					atraccion.setCupos(Integer.parseInt(strArray[i].toString()));
-					pos++;
-				}
-
-				if (atraccion.getTipo() == null && pos == i) {
-					atraccion.setTipo(strArray[i]);
-					pos++;
-				}
-
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				Usuario usuario = this.parsearUsuario(linea);
+				usuarios.add(usuario);
 			}
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if (scanner != null) {
+				scanner.close();
+			}
+		}
+
+		return usuarios;
+	}
+
+	public List<Atraccion> leerArchivoAtracciones() {
+		List<Atraccion> atracciones = new ArrayList<>();
+		Scanner scanner = null;
+
+		try {
+			File file = new File("resources/in/Atracciones.in");
+			scanner = new Scanner(file);
+
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				Atraccion atraccion = this.parsearAtraccion(linea);
+				atracciones.add(atraccion);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (scanner != null) {
+				scanner.close();
+			}
+		}
+
+		return atracciones;
+	}
+
+	public List<Promocion> leerArchivoPromociones() {
+		List<Promocion> promociones = new ArrayList<>();
+		Scanner scanner = null;
+
+		try {
+			File file = new File("resources/in/Promociones.in");
+			scanner = new Scanner(file);
+
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				Promocion promocion = this.parsearPromocion(linea);
+				promociones.add(promocion);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (scanner != null) {
+				scanner.close();
+			}
+		}
+
+		return promociones;
+	}
+
+	private Usuario parsearUsuario(String linea) {
+
+		String[] atributos = linea.split("\t");
+
+		String nombre = atributos[0];
+		String preferencia = atributos[1];
+		int monedas = Integer.parseInt(atributos[2]);
+		double tiempo = Double.parseDouble(atributos[3]);
+
+		Usuario usuario = null;
+		try {
+			usuario = new Usuario(nombre, monedas, tiempo, preferencia);
+		} catch (UsuarioExcepcion e) {
+			e.printStackTrace();
+		}
+		return usuario;
+
+	}
+
+	private Atraccion parsearAtraccion(String linea) {
+
+		String[] atributos = linea.split("\t");
+
+		String nombre = atributos[0];
+		int precio = Integer.parseInt(atributos[1]);
+		double duracion = Double.parseDouble(atributos[2]);
+		int cupos = Integer.parseInt(atributos[3]);
+		String tipo = atributos[4];
+
+		Atraccion atraccion = null;
+		try {
+			atraccion = new Atraccion(nombre, precio, duracion, tipo, cupos);
 		} catch (AtraccionExcepcion e) {
 			e.printStackTrace();
 		}
+		return atraccion;
+
 	}
 
-	// Para cuando este la clase Promocion
+	private Promocion parsearPromocion(String linea) {
 
-//	public void generaObjectPromocion(Promocion promocion, String[] strArray) {
-//
-//		int pos = 0;
-//		for (int i = 0; i < strArray.length; i++) {
-//			 
-//			if(promocion.getNombre() == null && pos == i) {
-//			    promocion.setNombre(strArray[i]);
-//				pos ++;
-//			}
-//			
-//			if(promocion.getIncluye() == null && pos == i) {
-//			    promocion.setIncluye(strArray[i]);
-//				pos ++;
-//			}
-//			
-//			if(promocion.getBeneficio() == 0 && pos == i) {
-//			    promocion.setBeneficio(Integer.parseInt(strArray[i].toString()));
-//				pos ++;
-//			}
-//			
-//			if(promocion.getValor() == 0 && pos == i) {
-//			    promocion.setValor(Integer.parseInt(strArray[i].toString()));
-//				pos ++;
-//			}
-//			
-//			if(promocion.getGratis() == null && pos == i) {
-//			    promocion.setGratis(strArray[i]);
-//				pos ++;
-//			}
-//			
-//		}
-//	}
+		String[] atributos = linea.split("!");
 
-	public void parseStringUsuario(String linea, Usuario usuario) {
-		String[] strArray = null;
-		strArray = linea.split("	");
+		String tipoPromocion = atributos[0];
 
-		generaObjectUsuario(usuario, strArray);
+		List<Oferta> ofertas = new ArrayList<Oferta>();
+
+		int indice = 1;
+		while (!atributos[indice].equals("|")) {
+			Atraccion atraccion = this.parsearAtraccion(atributos[indice]);
+			ofertas.add(atraccion);
+			indice++;
+		}
+
+		indice++;
+
+		Promocion promocion = null;
+
+		switch (tipoPromocion) {
+		case "%":
+			double porcentaje = Double.parseDouble(atributos[indice]);
+			promocion = new PromocionPorcentual(ofertas, porcentaje);
+			break;
+		case "$":
+			int monto = Integer.parseInt(atributos[indice]);
+			promocion = new PromocionAbsoluta(ofertas, monto);
+			break;
+		case "&":
+			promocion = new PromocionAxB(ofertas);
+			break;
+
+		}
+
+		return promocion;
+
 	}
 
-	public void parseStringAtraccion(String linea, Atraccion atraccion) {
-		String[] strArray = null;
-		strArray = linea.split("	");
+	public void guardarItinerario(Usuario usuario) {
 
-		generaObjectAtraccion(atraccion, strArray);
+		FileWriter archivo = null;
+		PrintWriter printerWriter = null;
+
+		try {
+			archivo = new FileWriter("resources/out/" + usuario.getNombre() + ".out");
+			printerWriter = new PrintWriter(archivo);
+
+			printerWriter.println(usuario);
+
+			String nombre = "";
+			int precio = 0;
+			double duracion = 0;
+
+			for (Oferta oferta : usuario.getOfertasCompradas()) {
+
+				nombre += oferta + "\n";
+				precio += oferta.getPrecioConDescuento();
+				duracion += oferta.getDuracion();
+
+			}
+
+			printerWriter.println("Ofertas compradas: \n" + nombre);
+			printerWriter.println("--------------------\n");
+			printerWriter.println("TOTAL:\n");
+			printerWriter.println("Precio total: " + precio);
+			printerWriter.println("Duracion total: " + duracion);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (archivo != null) {
+				try {
+					archivo.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 	}
-
-//	public void parseStringPromocion(String linea, Promocion promocion) {
-//		String[] strArray = null;
-//		strArray = linea.split("	");
-//
-//		generaObjectPromocion(strArray, promocion);
-//	}
-
-//	public void leerArchivoYListarUsuario(ArrayList<Usuario> usuarios) {
-//
-//		try {
-//			File fileUsuarios = new File(
-//					"C:\\\\Users\\\\Administrator\\\\Desktop\\\\Facu 2023\\\\Paradigmas de programacion\\\\Desarrollos\\\\TP\\\\src\\\\archivos de entrada\\\\"
-//							+ this.nombre + ".in");
-//			Scanner scvisita = new Scanner(fileUsuarios);
-//
-//			while (scvisita.hasNextLine()) {
-//
-//				String linea = scvisita.nextLine();		
-//				
-////				StringTokenizer atributo = new StringTokenizer(linea, "\t");
-//
-//				Usuario Usuario = new Usuario();
-//				parseStringUsuario(linea, Usuario);
-//	
-////				while (atributo.hasMoreElements()) {
-////					Usuario.setNombre(atributo.nextElement().toString());
-////					Usuario.setTipo(atributo.nextElement().toString());
-////					Usuario.setSaldo(Double.parseDouble(atributo.nextElement().toString()));
-////					Usuario.setTiempo(Integer.parseInt(atributo.nextElement().toString()));
-//
-////				}
-//				usuarios.add(Usuario);
-//			}
-//
-//			scvisita.close();
-//
-////			Usuarios.forEach(c -> System.out.println(c));
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-////		return Usuarios; 
-//	}
-
-//	public void leerArchivoYListarAtraccion(ArrayList<Atraccion> atracciones) {
-//
-//		try {
-//			File fileatracciones = new File(
-//					"C:\\\\Users\\\\Administrator\\\\Desktop\\\\Facu 2023\\\\Paradigmas de programacion\\\\Desarrollos\\\\TP\\\\src\\\\archivos de entrada\\\\"
-//							+ this.nombre + ".in");
-//			Scanner scatraccion = new Scanner(fileatracciones);
-//
-//			while (scatraccion.hasNextLine()) {
-//
-//				String linea = scatraccion.nextLine();
-////				StringTokenizer atributo = new StringTokenizer(linea, "\t");
-//
-////				Usuario Usuario = new Usuario();
-//				Atraccion atraccion = new Atraccion();
-//				parseStringAtraccion(linea, atraccion);
-//
-////				while (atributo.hasMoreElements()) {
-////
-////					atraccion.setNombre(atributo.nextElement().toString());
-////					atraccion.setCosto(Integer.parseInt(atributo.nextElement().toString()));
-////					atraccion.setTiempo(Double.parseDouble(atributo.nextElement().toString()));
-////					atraccion.setCupo(Integer.parseInt(atributo.nextElement().toString()));
-////					atraccion.setTipo(atributo.nextElement().toString());
-////				}
-//				atracciones.add(atraccion);
-//			}
-//
-//			scatraccion.close();
-//
-////			Usuarios.forEach(c -> System.out.println(c));
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-////		return Usuarios;
-//	}
-
-//	public void leerArchivoYListarPromocion(ArrayList<Promocion> promociones) {
-//
-//		try {
-//			File filepromociones = new File(
-//					"C:\\\\Users\\\\Administrator\\\\Desktop\\\\Facu 2023\\\\Paradigmas de programacion\\\\Desarrollos\\\\TP\\\\src\\\\archivos de entrada\\\\"
-//							+ this.nombre + ".in");
-//			Scanner scpromocion = new Scanner(filepromociones);
-//
-//			while (scpromocion.hasNextLine()) {
-//
-//				String linea = scpromocion.nextLine();
-//				StringTokenizer atributo = new StringTokenizer(linea, "\t");
-//
-////				Usuario Usuario = new Usuario();
-//				Promocion promocion = new Promocion();
-//				parseStringPromocion(linea, promocion);
-//
-////				while (atributo.hasMoreElements()) {
-////					promocion.setNombre(atributo.nextElement().toString());
-////					promocion.setIncluye(atributo.nextElement().toString());
-////					promocion.setBeneficio(Integer.parseInt(atributo.nextElement().toString()));
-////					promocion.setValor(Integer.parseInt(atributo.nextElement().toString()));
-////					promocion.setGratis(atributo.nextElement().toString());
-////				}
-//
-//				promociones.add(promocion);
-//
-//			}
-//
-//			scpromocion.close();
-//
-////			Usuarios.forEach(c -> System.out.println(c));
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-////		return Usuarios;
-//	}
-
-//	public void guardarArchivo(double[] datos) {
-//		FileWriter file = null;
-//		PrintWriter printerWriter = null;
-//
-//		try {
-//			file = new FileWriter("casos de prueba/out/" + this.nombre + ".out");
-//			printerWriter = new PrintWriter(file);
-//
-//			for (int i = 0; i < datos.length; i++) {
-//				// Imprime los datos y hace un salto de linea
-//				printerWriter.println(datos[i]);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			if (file != null) {
-//				try {
-//					file.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-//	}
-
 }
