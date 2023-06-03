@@ -1,0 +1,31 @@
+Usuario: 
+Nombre: Frodo
+Monedas: 49930
+Tiempo: 84.5
+Preferencia: Aventura
+
+Ofertas compradas: 
+Promocion
+-Atracciones incluidas: [Bosque Negro, Mordor]
+-Duracion: 7.0
+-Precio original: 28
+-Precio con descuento: 23
+
+Promocion
+-Atracciones incluidas: [Minas Tirith, Abismo de Helm, Erebor]
+-Duracion: 7.5
+-Precio original: 22
+-Precio con descuento: 12
+
+Atraccion
+Nombre: [Lothlórien]
+-Precio: 35
+-Duracion: 1.0
+
+
+--------------------
+
+TOTAL:
+
+Precio total: 70
+Duracion total: 15.5
