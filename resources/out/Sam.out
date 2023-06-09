@@ -1,19 +1,58 @@
 Usuario: 
 Nombre: Sam
-Monedas: 33
-Tiempo: 1.5
+Monedas: 35795
+Tiempo: 7943.0
 Preferencia: Degustacion
 
 Ofertas compradas: 
+Promocion
+-Atracciones incluidas: [Lothlórien, La Comarca, Rivendell]
+-Duracion: 12.5
+-Precio original: 48
+-Precio con descuento: 34
+
 Atraccion
-Nombre: [La Comarca]
--Precio: 3
--Duracion: 6.5
+Nombre: [Isengard]
+-Precio: 23
+-Duracion: 7.5
+
+Promocion
+-Atracciones incluidas: [Monte del Destino, Caradhras, Bosque Negro]
+-Duracion: 18.5
+-Precio original: 133
+-Precio con descuento: 78
+
+Promocion
+-Atracciones incluidas: [Anduin, Rohan]
+-Duracion: 5.0
+-Precio original: 25
+-Precio con descuento: 20
+
+Promocion
+-Atracciones incluidas: [Minas Tirith, Abismo de Helm, Erebor]
+-Duracion: 7.5
+-Precio original: 22
+-Precio con descuento: 7
+
+Atraccion
+Nombre: [Mordor]
+-Precio: 25
+-Duracion: 3.0
+
+Atraccion
+Nombre: [Moria]
+-Precio: 10
+-Duracion: 2.0
+
+Atraccion
+Nombre: [Brandivino]
+-Precio: 8
+-Duracion: 1.0
 
 
 --------------------
 
 TOTAL:
 
-Precio total: 3
-Duracion total: 6.5
+Precio total: 205
+Duracion total: 57.0

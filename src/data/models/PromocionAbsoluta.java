@@ -1,6 +1,6 @@
 package data.models;
 
-import java.util.*;
+import java.util.List;
 
 public class PromocionAbsoluta extends Promocion {
 
