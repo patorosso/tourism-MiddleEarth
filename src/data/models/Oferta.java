@@ -22,7 +22,7 @@ public abstract class Oferta implements Comparable<Oferta> {
 
 	public abstract boolean hayCupo();
 
-	public abstract boolean restarCupo();
+	public abstract void restarCupo();
 
 	public abstract String toString();
 
@@ -35,6 +35,5 @@ public abstract class Oferta implements Comparable<Oferta> {
 	public abstract double getDuracion();
 
 	public abstract String getTipo();
-	
 
 }

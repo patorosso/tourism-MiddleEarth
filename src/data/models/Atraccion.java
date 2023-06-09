@@ -51,11 +51,9 @@ public class Atraccion extends Oferta {
 	}
 
 	@Override
-	public boolean restarCupo() {
+	public void restarCupo() {
 		if (this.cupos > 0)
 			this.cupos--;
-
-		return this.cupos != 0;
 	}
 
 	@Override
@@ -89,6 +87,5 @@ public class Atraccion extends Oferta {
 	public String getTipo() {
 		return this.tipo;
 	}
-
 
 }

@@ -63,12 +63,10 @@ public abstract class Promocion extends Oferta {
 	}
 
 	@Override
-	public boolean restarCupo() {
-		for (Oferta oferta : ofertas) {
+	public void restarCupo() {
+		for (Oferta oferta : ofertas) 
 			oferta.restarCupo();
-		}
-
-		return true;
+		
 	}
 
 	@Override
