@@ -1,6 +1,7 @@
 package data.models;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -11,7 +12,7 @@ public class Main {
 		List<Oferta> ofertas = new ArrayList<Oferta>();
 		List<Usuario> usuarios = archivo.leerArchivoUsuarios();
 		List<Atraccion> atracciones = archivo.leerArchivoAtracciones();
-		List<Promocion> promociones = archivo.leerArchivoPromociones();
+		List<Promocion> promociones = archivo.leerArchivoPromociones(atracciones);
 		
 		ofertas.addAll(atracciones);
 		ofertas.addAll(promociones);

@@ -18,13 +18,12 @@ public class Sistema {
 
 	public void ofertarActividades() {
 
-		System.out.println("Bienvenido a la Tierra Media");
-		System.out.println("----------------------------\n");
-
 		try {
 
-			// ABRIR UN ARCHIVO DE RESUMEN
 			for (Usuario usuario : usuarios) {
+
+				System.out.println("Bienvenido a la Tierra Media");
+				System.out.println("----------------------------\n");
 
 				System.out.println("Nombre visitante: " + usuario.getNombre() + "\n");
 				Ofertador ofertador = new Ofertador(ofertas, usuario);
@@ -38,7 +37,7 @@ public class Sistema {
 					Scanner scanner = new Scanner(System.in);
 					String opcion;
 					do {
-						System.out.println("Acepta sugerencia? Ingrese S o N");
+						System.out.println("Acepta sugerencia? Ingrese S o N\n");
 						opcion = scanner.nextLine().toUpperCase();
 					} while (!opcion.equals("S") && !opcion.equals("N"));
 
@@ -47,8 +46,8 @@ public class Sistema {
 						usuario.consumirTiempo(oferta.getDuracion());
 						usuario.consumirMonedas(oferta.getPrecioConDescuento());
 						if (!oferta.restarCupo())
-							ofertador.eliminarOferta();
-						System.out.println("Aceptada!");
+							ofertador.eliminarOferta(); // Si no tiene cupo, no tiene sentido tenerla en la lista
+						System.out.println("\nAceptada!");
 
 					}
 
@@ -57,31 +56,26 @@ public class Sistema {
 				}
 
 				this.mostrarItinerario(usuario);
-				
+
 				Archivo archivo = new Archivo();
-				
+
 				archivo.guardarItinerario(usuario);
 
-				System.out.println("Presione cualquier tecla para continuar...\n\n");
+				System.out.println("Presione ENTER para continuar...\n");
 
 				Scanner scanner = new Scanner(System.in);
-				char opcion;
+				scanner.nextLine();
 
-				opcion = scanner.next().toUpperCase().charAt(0);
-
-				System.out.print("\033[H\033[2J");
-				System.out.flush();
-				
-				
+				System.out.println("----------------------------");
 
 			}
 
-			System.out.println("FIN PROGRAMA");
+			System.out.println("Ya no hay usuarios, el programa ha finalizado.");
 
 		} catch (OfertadorExcepcion e) {
-			System.err.println("[Error capturado ofertador] " + e.getMessage());
+			System.err.println(e.getMessage());
 		} catch (UsuarioExcepcion e) {
-			System.out.println("[Error capturado usuario]" + e.getMessage());
+			System.out.println(e.getMessage());
 		}
 
 	}

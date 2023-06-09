@@ -1,11 +1,15 @@
 package data.models;
 
-import java.util.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import data.models.excepcion.AtraccionExcepcion;
 import data.models.excepcion.UsuarioExcepcion;
-
-import java.io.*;
 
 public class Archivo {
 
@@ -61,7 +65,7 @@ public class Archivo {
 		return atracciones;
 	}
 
-	public List<Promocion> leerArchivoPromociones() {
+	public List<Promocion> leerArchivoPromociones(List<Atraccion> atracciones) {
 		List<Promocion> promociones = new ArrayList<>();
 		Scanner scanner = null;
 
@@ -71,7 +75,7 @@ public class Archivo {
 
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
-				Promocion promocion = this.parsearPromocion(linea);
+				Promocion promocion = this.parsearPromocion(linea, atracciones);
 				promociones.add(promocion);
 			}
 		} catch (Exception e) {
@@ -124,7 +128,7 @@ public class Archivo {
 
 	}
 
-	private Promocion parsearPromocion(String linea) {
+	private Promocion parsearPromocion(String linea, List<Atraccion> atracciones) {
 
 		String[] atributos = linea.split("!");
 
@@ -134,7 +138,11 @@ public class Archivo {
 
 		int indice = 1;
 		while (!atributos[indice].equals("|")) {
-			Atraccion atraccion = this.parsearAtraccion(atributos[indice]);
+			Atraccion atraccion = null;
+			for (Atraccion atr : atracciones) {
+				if(atr.getNombre().equals(atributos[indice]))
+					atraccion = atr;
+			}
 			ofertas.add(atraccion);
 			indice++;
 		}

@@ -1,7 +1,11 @@
 package data.models;
 
-import java.util.*;
-import data.models.excepcion.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+import data.models.excepcion.OfertadorExcepcion;
 
 public class Ofertador implements IteratorOferta {
 

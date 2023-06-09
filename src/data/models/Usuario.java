@@ -1,9 +1,9 @@
 package data.models;
 
-import data.models.excepcion.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import data.models.excepcion.UsuarioExcepcion;
 
 public class Usuario {
 

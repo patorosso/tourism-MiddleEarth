@@ -1,3 +1,9 @@
-%!Bosque Negro	3	4	12	Aventura!Mordor	25	3	4	Aventura!|!0.2
-$!Minas Tirith	5	2.5	25	Paisaje!Abismo de Helm	5	2	15	Paisaje!Erebor	12	3	32	Paisaje!|!10
-$!Minas Tirith	5	2.5	25	Paisaje!Anduin	20	2	3	Paisaje!|!10
+$!Minas Tirith!Abismo de Helm!Erebor!|!15
+$!Minas Tirith!Anduin!|!17
+$!Monte del Destino!Caradhras!Bosque Negro!|!55
+&!Bree!|
+&!Caradhras!Moria!|
+&!Anduin!Rohan!|
+%!Bosque Negro!Mordor!|!0.2
+%!Lothlórien!La Comarca!Rivendell!|!0.3
+%!Brandivino!Rohan!|!0.5

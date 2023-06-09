@@ -1,6 +1,6 @@
 package data.models;
 
-import java.util.*;
+import java.util.Objects;
 
 public abstract class Oferta implements Comparable<Oferta> {
 
