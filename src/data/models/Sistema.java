@@ -45,8 +45,7 @@ public class Sistema {
 						usuario.comprar(oferta);
 						usuario.consumirTiempo(oferta.getDuracion());
 						usuario.consumirMonedas(oferta.getPrecioConDescuento());
-						if (!oferta.restarCupo())
-							ofertador.eliminarOferta(); // Si no tiene cupo, no tiene sentido tenerla en la lista
+						oferta.restarCupo(); // Si no tiene cupo, no tiene sentido tenerla en la lista
 						System.out.println("\nAceptada!");
 
 					}

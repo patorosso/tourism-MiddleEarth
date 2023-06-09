@@ -1,7 +1,7 @@
 Usuario: 
 Nombre: Frodo
-Monedas: 49795
-Tiempo: 40.0
+Monedas: 49813
+Tiempo: 79940.0
 Preferencia: Aventura
 
 Ofertas compradas: 
@@ -34,21 +34,16 @@ Promocion
 -Precio con descuento: 20
 
 Promocion
+-Atracciones incluidas: [Bree, Isengard]
+-Duracion: 10.5
+-Precio original: 28
+-Precio con descuento: 5
+
+Promocion
 -Atracciones incluidas: [Minas Tirith, Abismo de Helm, Erebor]
 -Duracion: 7.5
 -Precio original: 22
 -Precio con descuento: 7
-
-Promocion
--Atracciones incluidas: [Bree]
--Duracion: 3.0
--Precio original: 5
--Precio con descuento: 0
-
-Atraccion
-Nombre: [Isengard]
--Precio: 23
--Duracion: 7.5
 
 Atraccion
 Nombre: [Brandivino]
@@ -60,5 +55,5 @@ Nombre: [Brandivino]
 
 TOTAL:
 
-Precio total: 205
+Precio total: 187
 Duracion total: 60.0

@@ -1,54 +1,14 @@
 Usuario: 
 Nombre: Galadriel
-Monedas: 99855
-Tiempo: 4951.0
+Monedas: 100000
+Tiempo: 5000.0
 Preferencia: Paisaje
 
 Ofertas compradas: 
-Promocion
--Atracciones incluidas: [Anduin, Rohan]
--Duracion: 5.0
--Precio original: 25
--Precio con descuento: 20
-
-Promocion
--Atracciones incluidas: [Minas Tirith, Abismo de Helm, Erebor]
--Duracion: 7.5
--Precio original: 22
--Precio con descuento: 7
-
-Atraccion
-Nombre: [Brandivino]
--Precio: 8
--Duracion: 1.0
-
-Promocion
--Atracciones incluidas: [Lothlórien, La Comarca, Rivendell]
--Duracion: 12.5
--Precio original: 48
--Precio con descuento: 34
-
-Promocion
--Atracciones incluidas: [Caradhras, Moria]
--Duracion: 8.5
--Precio original: 40
--Precio con descuento: 30
-
-Promocion
--Atracciones incluidas: [Bosque Negro, Mordor]
--Duracion: 7.0
--Precio original: 28
--Precio con descuento: 23
-
-Atraccion
-Nombre: [Isengard]
--Precio: 23
--Duracion: 7.5
-
 
 --------------------
 
 TOTAL:
 
-Precio total: 145
-Duracion total: 49.0
+Precio total: 0
+Duracion total: 0.0
