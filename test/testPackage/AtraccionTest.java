@@ -1,3 +1,8 @@
+package testPackage;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +23,11 @@ class AtraccionTest {
 	}
 	
 	@Test
-	void comparaCorrectamente() {
-		// TODO
+	void comparaCorrectamente() throws AtraccionExcepcion {
+		Atraccion atraccion1 = new Atraccion("Moria", 4, 4, "Aventura", 1);
+		Atraccion atraccion2 = new Atraccion("Mordor", 5, 5, "Aventura", 1);
+		assertEquals(1, atraccion1.compareTo(atraccion2));
+		assertEquals(-1, atraccion2.compareTo(atraccion1));
 	}
 	
 	@Test
