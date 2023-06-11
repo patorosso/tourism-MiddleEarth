@@ -1,3 +1,7 @@
+package testPackage;
+
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +33,11 @@ class PromocionTest {
 	}
 	
 	@Test
-	void comparaCorrectamente() {
-		// TODO
+	void comparaCorrectamente() throws AtraccionExcepcion {
+		Atraccion atraccion1 = new Atraccion("Moria", 4, 4, "Aventura", 1);
+		Atraccion atraccion2 = new Atraccion("Mordor", 5, 5, "Aventura", 1);
+		assertEquals(1, atraccion1.compareTo(atraccion2));
+		assertEquals(-1, atraccion2.compareTo(atraccion1));
 	}
 	
 	@Test
