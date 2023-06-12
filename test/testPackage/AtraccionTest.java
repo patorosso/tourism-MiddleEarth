@@ -1,8 +1,6 @@
 package testPackage;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +8,7 @@ import data.models.Atraccion;
 import data.models.excepcion.AtraccionExcepcion;
 
 class AtraccionTest {
-	
+
 	Atraccion atraccion;
 
 	@Test
@@ -21,7 +19,7 @@ class AtraccionTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	void comparaCorrectamente() throws AtraccionExcepcion {
 		Atraccion atraccion1 = new Atraccion("Moria", 4, 4, "Aventura", 1);
@@ -29,7 +27,7 @@ class AtraccionTest {
 		assertEquals(1, atraccion1.compareTo(atraccion2));
 		assertEquals(-1, atraccion2.compareTo(atraccion1));
 	}
-	
+
 	@Test
 	void equalsTest() {
 		creaAtraccionCorrectamenteTest();
@@ -40,7 +38,7 @@ class AtraccionTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	void restaCupoCorrectamente() {
 		creaAtraccionCorrectamenteTest();
