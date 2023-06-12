@@ -33,7 +33,6 @@ public class Sistema {
 					Oferta oferta = ofertador.siguienteOferta();
 					System.out.println(oferta);
 
-					// Bloque try arroja una exception
 					Scanner scanner = new Scanner(System.in);
 					String opcion;
 					do {
@@ -45,7 +44,7 @@ public class Sistema {
 						usuario.comprar(oferta);
 						usuario.consumirTiempo(oferta.getDuracion());
 						usuario.consumirMonedas(oferta.getPrecioConDescuento());
-						oferta.restarCupo(); // Si no tiene cupo, no tiene sentido tenerla en la lista
+						oferta.restarCupo();
 						System.out.println("\nAceptada!");
 
 					}

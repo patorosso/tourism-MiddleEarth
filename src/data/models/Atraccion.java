@@ -23,7 +23,6 @@ public class Atraccion extends Oferta {
 		if (otraOferta.esPromocion())
 			return 1;
 
-		// Tal vez no hagan falta 2 if y pueda resolverse con un return
 		if (this.duracion + this.precioSinDescuento > otraOferta.getDuracion() + otraOferta.getPrecioSinDescuento())
 			return -1;
 
@@ -72,7 +71,6 @@ public class Atraccion extends Oferta {
 		return this.precioSinDescuento;
 	}
 
-	// Tal vez no sea necesario
 	@Override
 	public int getPrecioConDescuento() {
 		return this.precioSinDescuento;

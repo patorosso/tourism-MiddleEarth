@@ -13,7 +13,7 @@ public abstract class Promocion extends Oferta {
 		this.ofertas = ofertas;
 		this.nombre = "";
 
-		// Tal vez no sea la mejor manera
+		
 		for (Oferta oferta : this.ofertas) {
 			this.nombre += oferta.getNombre() + ", ";
 			this.precioSinDescuento += oferta.getPrecioSinDescuento();

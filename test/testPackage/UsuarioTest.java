@@ -14,11 +14,10 @@ import data.models.Oferta;
 import data.models.excepcion.AtraccionExcepcion;
 import data.models.excepcion.UsuarioExcepcion;
 
-
 class UsuarioTest {
-	
+
 	Usuario user;
-	
+
 	@Test
 	void creaUsuarioCorrectamente() {
 		try {
@@ -35,9 +34,8 @@ class UsuarioTest {
 			this.user = new Usuario("test", 10, 10, "preferencia Test");
 		} catch (UsuarioExcepcion e) {
 			assertTrue(mensajeError.contains(e.getMessage()));
-		}	
+		}
 	}
-	
 
 	@Test
 	void consumeCorrectamente() {
@@ -51,7 +49,7 @@ class UsuarioTest {
 		Assert.assertEquals(5, this.user.getMonedas());
 		Assert.assertEquals(5.0, user.getTiempo(), 0);
 	}
-	
+
 	@Test
 	void compraCorrectamente() {
 		Atraccion oferta;
@@ -65,6 +63,6 @@ class UsuarioTest {
 		} catch (AtraccionExcepcion e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

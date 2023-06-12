@@ -15,7 +15,7 @@ import data.models.PromocionAbsoluta;
 import data.models.excepcion.AtraccionExcepcion;
 
 class PromocionTest {
-	
+
 	Promocion promocion;
 
 	@Test
@@ -31,7 +31,7 @@ class PromocionTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	void comparaCorrectamente() throws AtraccionExcepcion {
 		Atraccion atraccion1 = new Atraccion("Moria", 4, 4, "Aventura", 1);
@@ -39,7 +39,7 @@ class PromocionTest {
 		assertEquals(1, atraccion1.compareTo(atraccion2));
 		assertEquals(-1, atraccion2.compareTo(atraccion1));
 	}
-	
+
 	@Test
 	void equalsTest() {
 		creaPromocionCorrectamente();
@@ -52,7 +52,7 @@ class PromocionTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	void restaCupoCorrectamente() {
 		creaPromocionCorrectamente();
