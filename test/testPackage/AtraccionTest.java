@@ -1,6 +1,7 @@
 package testPackage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ class AtraccionTest {
 		try {
 			this.atraccion = new Atraccion("atraccion", 5, 5, "tipo 1", 1);
 		} catch (AtraccionExcepcion e) {
-			e.printStackTrace();
+			fail("no deberia arrojar exception");
 		}
 	}
 
@@ -35,7 +36,7 @@ class AtraccionTest {
 			Atraccion oferta = new Atraccion("atraccion", 5, 5, "tipo 1", 3);
 			Assert.assertTrue(this.atraccion.equals(oferta));
 		} catch (AtraccionExcepcion e) {
-			e.printStackTrace();
+			fail("no deberia arrojar exception");
 		}
 	}
 

@@ -1,5 +1,6 @@
 package testPackage;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -37,9 +38,9 @@ class OfertadorTest {
 			ofertas.add(oferta2);
 			this.usuario = new Usuario("test", 10, 10, "preferencia2");
 		} catch (AtraccionExcepcion e) {
-			e.printStackTrace();
+			fail("no deberia arrojar exception");
 		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
+			fail("no deberia arrojar exception");
 		}
 	}
 
@@ -49,7 +50,7 @@ class OfertadorTest {
 		try {
 			this.ofertador = new Ofertador(this.ofertas, this.usuario);
 		} catch (OfertadorExcepcion e) {
-			e.printStackTrace();
+			fail("no deberia arrojar exception");
 		}
 	}
 
@@ -71,7 +72,7 @@ class OfertadorTest {
 			
 			assertEquals(ofertasEsperadas, ofertasObtenidas);
 		} catch (Exception e) {
-			e.printStackTrace();
+			fail("no deberia arrojar exception");
 		}
 	}
 	
@@ -157,6 +158,128 @@ class OfertadorTest {
 		}
 		
 		assertEquals(ofertasEsperadas, ofertasObtenidas);
+	}
+	
+	@Test
+	void noOfertaAtraccionComprada() throws AtraccionExcepcion, UsuarioExcepcion, OfertadorExcepcion {
+		this.usuario = new Usuario("Frodo", 1000, 1000, "Paisaje");
+		List<Oferta> ofertaAxB = new ArrayList<Oferta>();
+		Atraccion atraccion1 = new Atraccion("Minas Tirith", 6, 6, "Paisaje", 2);
+		Atraccion atraccion2 = new Atraccion("Abismo de Helm", 7, 7, "Paisaje", 1);
+		Atraccion atraccion3 = new Atraccion("Rivendel", 11, 11, "Aventura", 1);
+		
+		ofertaAxB.add(atraccion1);
+		ofertaAxB.add(atraccion2);
+		Promocion promoAxB = new PromocionAxB(ofertaAxB);
+		
+		this.ofertas = new ArrayList<Oferta>();
+		this.ofertas.add(promoAxB);
+		this.ofertas.add(atraccion1);
+		this.ofertas.add(atraccion2);
+		this.ofertas.add(atraccion3);
+
+		this.ofertador = new Ofertador(this.ofertas, this.usuario);
+		List<Oferta> ofertasEsperadas = new ArrayList<>();
+		
+		// Esperamos la promo y la atraccion que no esta incluida en la oferta
+		ofertasEsperadas.add(promoAxB);
+		ofertasEsperadas.add(atraccion3);
+		
+		List<Oferta> ofertasObtenidas = new ArrayList<>();
+		while (this.ofertador.tieneSiguienteOferta()) {
+			Oferta oferta = ofertador.siguienteOferta();
+			ofertasObtenidas.add(oferta);
+			this.usuario.comprar(oferta);
+		}
+		
+		assertEquals(ofertasEsperadas, ofertasObtenidas);
+	}
+	
+	@Test
+	void noOfertaAtraccionQueNoPuedeComprar() throws AtraccionExcepcion, UsuarioExcepcion, OfertadorExcepcion {
+		// moneda tiempo
+		this.usuario = new Usuario("Frodo", 10, 10, "Paisaje");
+		List<Oferta> ofertaAxB = new ArrayList<Oferta>();
+		Atraccion atraccion1 = new Atraccion("Minas Tirith", 8, 1, "Paisaje", 10);
+		Atraccion atraccion2 = new Atraccion("Abismo de Helm", 1, 8, "Paisaje", 10);
+		Atraccion atraccion3 = new Atraccion("Lothlorien", 2, 2, "Aventura", 10);
+		Atraccion atraccion4 = new Atraccion("Mordor", 4, 1, "Aventura", 10);
+		Atraccion atraccion5 = new Atraccion("Moria", 1, 4, "Aventura", 10);
+		
+		this.ofertas = new ArrayList<Oferta>();
+		this.ofertas.add(atraccion1);
+		this.ofertas.add(atraccion2);
+		this.ofertas.add(atraccion3);
+		this.ofertas.add(atraccion4);
+		this.ofertas.add(atraccion5);
+
+		this.ofertador = new Ofertador(this.ofertas, this.usuario);
+		List<Oferta> ofertasEsperadas = new ArrayList<>();
+		
+		// Esperamos las primeras 2 atracciones, ya que para las demas se queda sin monedas y tiempo
+		ofertasEsperadas.add(atraccion1);
+		ofertasEsperadas.add(atraccion2);
+		
+		List<Oferta> ofertasObtenidas = new ArrayList<>();
+		while (this.ofertador.tieneSiguienteOferta()) {
+			Oferta oferta = ofertador.siguienteOferta();
+			ofertasObtenidas.add(oferta);
+			this.usuario.comprar(oferta);
+			this.usuario.consumirTiempo(oferta.getDuracion());
+			this.usuario.consumirMonedas(oferta.getPrecioConDescuento());
+		}
+		
+		assertEquals(ofertasEsperadas, ofertasObtenidas);
+	}
+	
+	@Test
+	void noOfertaAtraccionesSinCupo() throws AtraccionExcepcion, UsuarioExcepcion, OfertadorExcepcion {
+		this.usuario = new Usuario("Frodo", 100, 100, "Paisaje");
+		Usuario usuario2 = new Usuario("Galadriel", 100, 100, "Paisaje");
+		List<Oferta> ofertaAxB = new ArrayList<Oferta>();
+		Atraccion atraccion1 = new Atraccion("Minas Tirith", 6, 6, "Paisaje", 2);
+		Atraccion atraccion2 = new Atraccion("Abismo de Helm", 7, 7, "Paisaje", 2);
+		Atraccion atraccion3 = new Atraccion("Rivendel", 11, 11, "Paisaje", 1);
+		
+		this.ofertas = new ArrayList<Oferta>();
+		this.ofertas.add(atraccion1);
+		this.ofertas.add(atraccion2);
+		this.ofertas.add(atraccion3);
+
+		this.ofertador = new Ofertador(this.ofertas, this.usuario);
+		List<Oferta> ofertasEsperadasUsuario1 = new ArrayList<>();
+		
+		// Esperamos las 3 atracciones
+		ofertasEsperadasUsuario1.add(atraccion3);
+		ofertasEsperadasUsuario1.add(atraccion2);
+		ofertasEsperadasUsuario1.add(atraccion1);
+		
+		List<Oferta> ofertasObtenidasUsuario1 = new ArrayList<>();
+		while (this.ofertador.tieneSiguienteOferta()) {
+			Oferta oferta = ofertador.siguienteOferta();
+			ofertasObtenidasUsuario1.add(oferta);
+			this.usuario.comprar(oferta);
+			oferta.restarCupo();
+		}
+		
+		assertEquals(ofertasEsperadasUsuario1, ofertasObtenidasUsuario1);
+		
+		//  Segundo User
+		this.ofertador = new Ofertador(this.ofertas, usuario2);
+		
+		// Esperamos las primeras 2 atracciones, que les queda 1 cupo
+		List<Oferta> ofertasEsperadasUsuario2 = new ArrayList<>();
+		ofertasEsperadasUsuario2.add(atraccion2);
+		ofertasEsperadasUsuario2.add(atraccion1);
+		
+		List<Oferta> ofertasObtenidasUsuario2 = new ArrayList<>();
+		while (this.ofertador.tieneSiguienteOferta()) {
+			Oferta oferta = ofertador.siguienteOferta();
+			ofertasObtenidasUsuario2.add(oferta);
+			usuario2.comprar(oferta);
+		}
+		
+		assertEquals(ofertasEsperadasUsuario2, ofertasObtenidasUsuario2);
 	}
 
 }

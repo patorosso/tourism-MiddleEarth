@@ -1,5 +1,6 @@
 package testPackage;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ class UsuarioTest {
 		try {
 			this.user = new Usuario("test", 10, 10, "preferencia Test");
 		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
+			fail("no deberia arrojar exception");
 		}
 	}
 
@@ -44,7 +45,7 @@ class UsuarioTest {
 			this.user.consumirTiempo(5);
 			this.user.consumirMonedas(5);
 		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
+			fail("no deberia arrojar exception");
 		}
 		Assert.assertEquals(5, this.user.getMonedas());
 		Assert.assertEquals(5.0, user.getTiempo(), 0);
@@ -61,8 +62,7 @@ class UsuarioTest {
 			this.user.comprar(oferta);
 			Assert.assertTrue(ofertas.equals(ofertas));
 		} catch (AtraccionExcepcion e) {
-			e.printStackTrace();
+			fail("no deberia arrojar exception");
 		}
-
 	}
 }

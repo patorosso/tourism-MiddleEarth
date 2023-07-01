@@ -1,6 +1,7 @@
 package testPackage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ class PromocionTest {
 			ofertas.add(oferta2);
 			this.promocion = new PromocionAbsoluta(ofertas, 1);
 		} catch (AtraccionExcepcion e) {
-			e.printStackTrace();
+			fail("no deberia arrojar exception");
 		}
 	}
 
@@ -49,7 +50,7 @@ class PromocionTest {
 			Assert.assertTrue(this.promocion.equals(oferta1));
 			Assert.assertFalse(this.promocion.equals(oferta3));
 		} catch (AtraccionExcepcion e) {
-			e.printStackTrace();
+			fail("no deberia arrojar exception");
 		}
 	}
 
