@@ -13,11 +13,7 @@ import data.models.excepcion.UsuarioExcepcion;
 
 public class Archivo {
 
-	public Archivo() {
-
-	}
-
-	public List<Usuario> leerArchivoUsuarios() {
+	public static List<Usuario> leerArchivoUsuarios() {
 		List<Usuario> usuarios = new ArrayList<>();
 		Scanner scanner = null;
 
@@ -27,7 +23,7 @@ public class Archivo {
 
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
-				Usuario usuario = this.parsearUsuario(linea);
+				Usuario usuario = Archivo.parsearUsuario(linea);
 				usuarios.add(usuario);
 			}
 		} catch (Exception e) {
@@ -41,7 +37,7 @@ public class Archivo {
 		return usuarios;
 	}
 
-	public List<Atraccion> leerArchivoAtracciones() {
+	public static List<Atraccion> leerArchivoAtracciones() {
 		List<Atraccion> atracciones = new ArrayList<>();
 		Scanner scanner = null;
 
@@ -51,7 +47,7 @@ public class Archivo {
 
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
-				Atraccion atraccion = this.parsearAtraccion(linea);
+				Atraccion atraccion = Archivo.parsearAtraccion(linea);
 				atracciones.add(atraccion);
 			}
 		} catch (Exception e) {
@@ -65,7 +61,7 @@ public class Archivo {
 		return atracciones;
 	}
 
-	public List<Promocion> leerArchivoPromociones(List<Atraccion> atracciones) {
+	public static List<Promocion> leerArchivoPromociones(List<Atraccion> atracciones) {
 		List<Promocion> promociones = new ArrayList<>();
 		Scanner scanner = null;
 
@@ -75,7 +71,7 @@ public class Archivo {
 
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
-				Promocion promocion = this.parsearPromocion(linea, atracciones);
+				Promocion promocion = Archivo.parsearPromocion(linea, atracciones);
 				promociones.add(promocion);
 			}
 		} catch (Exception e) {
@@ -89,7 +85,7 @@ public class Archivo {
 		return promociones;
 	}
 
-	private Usuario parsearUsuario(String linea) {
+	private static Usuario parsearUsuario(String linea) {
 
 		String[] atributos = linea.split("\t");
 
@@ -108,7 +104,7 @@ public class Archivo {
 
 	}
 
-	private Atraccion parsearAtraccion(String linea) {
+	private static Atraccion parsearAtraccion(String linea) {
 
 		String[] atributos = linea.split("\t");
 
@@ -128,7 +124,7 @@ public class Archivo {
 
 	}
 
-	private Promocion parsearPromocion(String linea, List<Atraccion> atracciones) {
+	private static Promocion parsearPromocion(String linea, List<Atraccion> atracciones) {
 
 		String[] atributos = linea.split("!");
 
@@ -170,7 +166,7 @@ public class Archivo {
 
 	}
 
-	public void guardarItinerario(Usuario usuario) {
+	public static void guardarItinerario(Usuario usuario) {
 
 		FileWriter archivo = null;
 		PrintWriter printerWriter = null;
