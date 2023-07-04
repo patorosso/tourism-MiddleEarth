@@ -196,9 +196,7 @@ class OfertadorTest {
 
 	@Test
 	void noOfertaAtraccionQueNoPuedeComprar() throws AtraccionExcepcion, UsuarioExcepcion, OfertadorExcepcion {
-		// moneda tiempo
 		this.usuario = new Usuario("Frodo", 10, 10, "Paisaje");
-		List<Oferta> ofertaAxB = new ArrayList<Oferta>();
 		Atraccion atraccion1 = new Atraccion("Minas Tirith", 8, 1, "Paisaje", 10);
 		Atraccion atraccion2 = new Atraccion("Abismo de Helm", 1, 8, "Paisaje", 10);
 		Atraccion atraccion3 = new Atraccion("Lothlorien", 2, 2, "Aventura", 10);
@@ -236,7 +234,6 @@ class OfertadorTest {
 	void noOfertaAtraccionesSinCupo() throws AtraccionExcepcion, UsuarioExcepcion, OfertadorExcepcion {
 		this.usuario = new Usuario("Frodo", 100, 100, "Paisaje");
 		Usuario usuario2 = new Usuario("Galadriel", 100, 100, "Paisaje");
-		List<Oferta> ofertaAxB = new ArrayList<Oferta>();
 		Atraccion atraccion1 = new Atraccion("Minas Tirith", 6, 6, "Paisaje", 2);
 		Atraccion atraccion2 = new Atraccion("Abismo de Helm", 7, 7, "Paisaje", 2);
 		Atraccion atraccion3 = new Atraccion("Rivendel", 11, 11, "Paisaje", 1);
