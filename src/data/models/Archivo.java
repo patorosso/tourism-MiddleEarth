@@ -13,6 +13,9 @@ import data.models.excepcion.UsuarioExcepcion;
 
 public class Archivo {
 
+	private Archivo() {
+	};
+
 	public static List<Usuario> leerArchivoUsuarios() {
 		List<Usuario> usuarios = new ArrayList<>();
 		Scanner scanner = null;
@@ -23,7 +26,7 @@ public class Archivo {
 
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
-				Usuario usuario = Archivo.parsearUsuario(linea);
+				Usuario usuario = parsearUsuario(linea);
 				usuarios.add(usuario);
 			}
 		} catch (Exception e) {
@@ -47,7 +50,7 @@ public class Archivo {
 
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
-				Atraccion atraccion = Archivo.parsearAtraccion(linea);
+				Atraccion atraccion = parsearAtraccion(linea);
 				atracciones.add(atraccion);
 			}
 		} catch (Exception e) {
@@ -136,7 +139,7 @@ public class Archivo {
 		while (!atributos[indice].equals("|")) {
 			Atraccion atraccion = null;
 			for (Atraccion atr : atracciones) {
-				if(atr.getNombre().equals(atributos[indice]))
+				if (atr.getNombre().equals(atributos[indice]))
 					atraccion = atr;
 			}
 			ofertas.add(atraccion);

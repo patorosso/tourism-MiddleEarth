@@ -8,7 +8,7 @@ import data.models.excepcion.OfertadorExcepcion;
 import data.models.excepcion.UsuarioExcepcion;
 
 public class Sistema {
-	
+
 	private List<Oferta> ofertas;
 	private List<Usuario> usuarios;
 	private List<Atraccion> atracciones = Archivo.leerArchivoAtracciones();
@@ -17,7 +17,7 @@ public class Sistema {
 	public Sistema() {
 		this.ofertas = new ArrayList<Oferta>();
 		this.usuarios = Archivo.leerArchivoUsuarios();
-		
+
 		this.ofertas.addAll(atracciones);
 		this.ofertas.addAll(promociones);
 	}
@@ -61,9 +61,7 @@ public class Sistema {
 
 				this.mostrarItinerario(usuario);
 
-				Archivo archivo = new Archivo();
-
-				archivo.guardarItinerario(usuario);
+				Archivo.guardarItinerario(usuario);
 
 				System.out.println("Presione ENTER para continuar...\n");
 

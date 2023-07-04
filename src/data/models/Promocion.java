@@ -13,7 +13,6 @@ public abstract class Promocion extends Oferta {
 		this.ofertas = ofertas;
 		this.nombre = "";
 
-		
 		for (Oferta oferta : this.ofertas) {
 			this.nombre += oferta.getNombre() + ", ";
 			this.precioSinDescuento += oferta.getPrecioSinDescuento();
@@ -25,7 +24,6 @@ public abstract class Promocion extends Oferta {
 		this.nombre = this.nombre.substring(0, this.nombre.length() - 2);
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		Oferta other = (Oferta) obj;
@@ -64,9 +62,9 @@ public abstract class Promocion extends Oferta {
 
 	@Override
 	public void restarCupo() {
-		for (Oferta oferta : ofertas) 
+		for (Oferta oferta : ofertas)
 			oferta.restarCupo();
-		
+
 	}
 
 	@Override

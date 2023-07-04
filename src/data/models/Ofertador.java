@@ -27,9 +27,9 @@ public class Ofertador implements IteratorOferta {
 
 		ordenarLista(this.ofertas);
 	}
-	
+
 	public void eliminarOferta() {
-		this.indice --;
+		this.indice--;
 		this.ofertas.remove(this.indice);
 	}
 
@@ -54,17 +54,17 @@ public class Ofertador implements IteratorOferta {
 
 	@Override
 	public boolean tieneSiguienteOferta() {
-		
-		while(this.indice < this.ofertas.size() ) {
-			if(this.ofertas.get(indice).hayCupo() &&
-			   this.usuario.getTiempo() >= this.ofertas.get(this.indice).getDuracion() &&
-			   this.usuario.getMonedas() >= this.ofertas.get(this.indice).getPrecioConDescuento() &&
-			   !this.yaComproEstaOferta(this.ofertas.get(this.indice)))
+
+		while (this.indice < this.ofertas.size()) {
+			if (this.ofertas.get(indice).hayCupo()
+					&& this.usuario.getTiempo() >= this.ofertas.get(this.indice).getDuracion()
+					&& this.usuario.getMonedas() >= this.ofertas.get(this.indice).getPrecioConDescuento()
+					&& !this.yaComproEstaOferta(this.ofertas.get(this.indice)))
 				return true;
-			
-			this.indice ++;
-		}		
-		
+
+			this.indice++;
+		}
+
 		return false;
 	}
 
@@ -78,20 +78,20 @@ public class Ofertador implements IteratorOferta {
 		this.indice++;
 		return oferta;
 	}
-	
+
 	private boolean yaComproEstaOferta(Oferta oferta) {
-		
+
 		List<Oferta> compras = usuario.getOfertasCompradas();
-		
-		if(compras.isEmpty())
+
+		if (compras.isEmpty())
 			return false;
-		
-		for(Oferta compra : compras) {
-			if(compra.equals(oferta))
+
+		for (Oferta compra : compras) {
+			if (compra.equals(oferta))
 				return true;
-			
+
 		}
-		
+
 		return false;
 	}
 
