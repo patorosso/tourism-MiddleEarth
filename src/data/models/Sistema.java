@@ -1,5 +1,6 @@
 package data.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,13 +8,18 @@ import data.models.excepcion.OfertadorExcepcion;
 import data.models.excepcion.UsuarioExcepcion;
 
 public class Sistema {
-
+	
+	private List<Oferta> ofertas;
 	private List<Usuario> usuarios;
-	private List<Oferta> ofertas; // Desordenada, se lee directamente del archivo
+	private List<Atraccion> atracciones = Archivo.leerArchivoAtracciones();
+	private List<Promocion> promociones = Archivo.leerArchivoPromociones(atracciones);
 
-	public Sistema(List<Usuario> usuarios, List<Oferta> ofertas) {
-		this.usuarios = usuarios;
-		this.ofertas = ofertas;
+	public Sistema() {
+		this.ofertas = new ArrayList<Oferta>();
+		this.usuarios = Archivo.leerArchivoUsuarios();
+		
+		this.ofertas.addAll(atracciones);
+		this.ofertas.addAll(promociones);
 	}
 
 	public void ofertarActividades() {

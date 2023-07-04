@@ -1,14 +1,37 @@
 Usuario: 
 Nombre: Sam
-Monedas: 5000
-Tiempo: 8000.0
+Monedas: 0
+Tiempo: 26.0
 Preferencia: Degustacion
 
 Ofertas compradas: 
+Promocion
+-Atracciones incluidas: [Bree, Isengard]
+-Duracion: 10.5
+-Precio original: 28
+-Precio con descuento: 5
+
+Atraccion
+Nombre: [Rivendell]
+-Precio: 10
+-Duracion: 5.0
+
+Promocion
+-Atracciones incluidas: [Minas Tirith, Anduin]
+-Duracion: 4.5
+-Precio original: 25
+-Precio con descuento: 8
+
+Promocion
+-Atracciones incluidas: [Brandivino, Rohan]
+-Duracion: 4.0
+-Precio original: 13
+-Precio con descuento: 7
+
 
 --------------------
 
 TOTAL:
 
-Precio total: 0
-Duracion total: 0.0
+Precio total: 30
+Duracion total: 24.0
